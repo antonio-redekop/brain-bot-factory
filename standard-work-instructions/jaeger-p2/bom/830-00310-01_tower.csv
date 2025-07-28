@@ -1,0 +1,47 @@
+﻿find number,item number,item name,quantity,bom notes
+,830-00310-01,"Group, Jaeger Tower",,
+5,260-00136-01,"PCB, BPearl Insulator",1,
+1,290-00148-01,"Bpearl 3D LIDAR, Aviation Connector",1,
+2,290-00151-01,"UHD Camera, eCon, IMX412, RGB, GMSL2, 2.5mm Lens",1,
+3,290-00151-02,"Sense 2.0 Camera, eCon, IMX412, RGB, GMSL2, 6mm Lens",4,
+9,410-00130-01,"Tube, Bottom Fold Tower, Jaeger",1,
+10,410-00131-01,"Tube, Middle Fold Tower, Jaeger",1,
+11,410-00132-01,"Tube, Top Fold Tower, Jaeger",1,
+12,411-00484-01,"Tower Screen Top Bracket, Jaeger",1,
+13,411-00485-01,"Tower Screen Lower Bracket, Jaeger",1,
+14,411-00486-01,"Plate, Snap-in Keeper",3,
+15,411-00487-01,"Plate, Tower Alignment, Jaeger",4,
+16,411-00488-01,"Bracket, Tower Camera 5-deg, Jaeger",2,
+17,411-00489-01,"Bracket, Tower Camera 0-deg, Jaeger",2,
+18,411-00490-01,"Bracket, BPearl, Jaeger",1,
+19,411-00508-01,"Back Tower Service Panel, Jaeger",1,
+20,412-00201-01,"Mount, Pull Handle, Jaeger",2,
+21,412-00203-01,"Mount, Curved Flange Hinge, Jaeger",5,
+22,420-00215-01,"Bezel, Touchscreen, Jaeger",1,
+23,420-00216-01,"Bezel, Bpearl and Camera, Jaeger",1,
+24,420-00217-01,"Fold Cover, Bpearl and Camera, Jaeger",1,
+25,420-00218-01,"Cap, Fold Tower, Jaeger",1,
+26,423-00274-01,"Big Insert A, Hinge, Jaeger",1,
+27,423-00275-01,"Big Insert B, Hinge, Jaeger",1,
+28,423-00276-01,"Small Insert A, Hinge, Jaeger",1,
+29,423-00277-01,"Small Insert B, Hinge, Jaeger",1,
+32,438-00164-01,"LCD Neoprene Seal, Jaeger",1,
+33,442-00567-01,"Tight-Hold Draw Latch with Safety Catch, 300 Series Stainless Steel, 2-3/4"" Long x 1-1/8"" Wide",6,
+34,442-00568-01,"Hinge, Concealed SOSS 212, Satin Chrome",3,
+35,442-00569-01,"Push-to-Close Latch with Keeper, 10 lbf, 2.9-5.3mm Thk, Black",3,
+36,442-00570-01,"Handle, Pull, Oval 7""L, Black AL",1,
+37,442-00575-01,"Hole Grommet, SBR Rubber 1-1/8"" Hole Dia x 3/32"" Thk",1,
+38,446-00295-01,"Screw, M3 x 12mm, SHCS, Zinc-Plated Steel",4,hinge inserts mtg (4)
+40,446-00326-10,"Screw, M4x10mm, Flat Head, Hex, Zn",43,"latch bkt (6), cam bkt (16), bpearl bkt (3), touchscreen bkt (2), fold cover (4), cap (4), alignment plate (8)"
+41,446-00326-12,"Screw, M4x12mm, Flat Head, Hex, Zn",4,touchscreen bezel (4)
+43,446-00330-20,"Screw, M6x20mm, Button Head, Hex, Zn",2,pull handle (2)
+45,446-00375-10,"Screw, M4x10mm, Button Head, Hex, Zinc Plated Steel",21,"bpearl bezel (4), service panel (4), pull handle mtg (4), snap-in latch (6) bpearl (3)"
+47,446-00403-10,"Screw, M3.5X10, Button Head, Hex Drive, SS",20,latch & hook (20)
+44,446-00404-14,"Screw, M5x14mm, Flat Head, Hex, Zinc Plated Steel",22,hinge mtg (10) hinges (12)
+48,446-00405-01,"Screw, M4x10, Round Head, Phillips, Thread Forming, Zinc Plated Steel",8,touchscreen (8)
+46,446-00406-16,"Screw, M5x16mm, Button Head, Hex, Zn",10,cam (10)
+49,456-00158-01,"Washer, Shoulder #8 (M4) Nylon",3,bpearl (3)
+6,810-00309-01,"Cable Assy, 3D Lidar, HSD+2 A-Key to LEMO, 1300mm",1,
+7,810-00312-01,"Cable Assy, Mini-Fakra Quad Code-B to UHD CAM, 1000mm",1,
+8,810-00313-01,"Cable Assy, Mini-Fakra Quad Code-A to Scanning CAM, 2050mm",1,
+4,830-00247-01,"Touchscreen Assembly, Gen 3",1,
