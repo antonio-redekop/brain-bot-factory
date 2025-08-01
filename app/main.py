@@ -4,6 +4,9 @@ from dotenv import load_dotenv
 import os
 
 # Load environment variables from .env file in project root
+# This implementation for dev only.
+# In prod, API token storage will be in a scoped variable, taken from user input
+# Third-party PWM will be used for management of tokens
 load_dotenv()
 
 JIRA_EMAIL = os.environ["JIRA_EMAIL"] 
@@ -12,6 +15,15 @@ JIRA_DOMAIN = os.environ["JIRA_DOMAIN"]
 JIRA_URL = f"https://{JIRA_DOMAIN}/rest/api/3/issue/"
 
 def get_robot_issue(issue_key):
+    """
+    Fetches a Jira issue using the provided issue key.
+    Args:
+        issue_key (str): The unique identifier for the Jira issue.
+    Returns:
+        dict: The Jira issue data parsed as a JSON object.
+    Raises:
+        RuntimeError: If the request to Jira fails or returns a non-200 status code.
+    """
     auth = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
     url = f"{JIRA_URL}{issue_key}"
     headers = {
@@ -19,8 +31,9 @@ def get_robot_issue(issue_key):
     }
     response = requests.get(url, headers=headers, auth=auth)
 
-    if response.status_code != 200:
-        raise RuntimeError(f"Failed to fetch issue {issue_key}: {response.status_code} - {response.text}")
+    #Raise an error for any status code that isn't 2xx
+    response.raise_for_status()
+
     # return the response as a Python dict
     return response.json()
 
