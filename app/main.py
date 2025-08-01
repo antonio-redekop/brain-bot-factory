@@ -3,11 +3,12 @@ from requests.auth import HTTPBasicAuth
 from dotenv import load_dotenv
 import os
 
-# Load environment variables from .env
+# Load environment variables from .env file in project root
 load_dotenv()
-JIRA_EMAIL = os.getenv("JIRA_EMAIL") 
-JIRA_API_TOKEN = os.getenv("JIRA_API_TOKEN") 
-JIRA_DOMAIN = os.getenv("JIRA_DOMAIN")
+
+JIRA_EMAIL = os.environ["JIRA_EMAIL"] 
+JIRA_API_TOKEN = os.environ["JIRA_API_TOKEN"]
+JIRA_DOMAIN = os.environ["JIRA_DOMAIN"]
 JIRA_URL = f"https://{JIRA_DOMAIN}/rest/api/3/issue/"
 
 def get_robot_issue(issue_key):
