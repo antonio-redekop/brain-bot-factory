@@ -1,4 +1,5 @@
 from app.main import get_robot_issue
+from app.main import extract_description
 
 def test_get_robot_issue():
     try:
@@ -10,15 +11,17 @@ def test_get_robot_issue():
 
     fields = robot_issue["fields"]
     assignee = fields["assignee"]["displayName"] if fields["assignee"] else "Unassigned"
-    description = fields["description"]["content"][0]["content"][0]["text"]
+    description = extract_description(fields["description"])
+
     # extract a list of comments
     comments = [
         c["body"]["content"][0]["content"][0]["text"] for c in fields["comment"]["comments"]
     ]
 
-    assert description == "Here is the description"
+    assert description == "Here is line #1 of the description\nHere is line #2 of the description"
     assert assignee == "Antonio Redekop"
     assert fields["summary"] == "Jaeger Test Ticket - Do Not Use"
     assert fields["status"]["name"] == "In Progress"
     assert fields["created"] == "2025-07-22T16:44:08.222-0700"
     assert comments[0] == "Test Comment #1"
+    assert comments[1] == "Test Comment #2"
