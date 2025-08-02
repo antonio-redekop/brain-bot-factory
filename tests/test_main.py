@@ -2,6 +2,7 @@ import requests
 
 from app.main import get_robot_issue
 from app.main import extract_description
+from app.main import post_issue
 
 def test_get_robot_issue():
     try:
@@ -30,3 +31,6 @@ def test_get_robot_issue():
     assert fields["created"] == "2025-07-22T16:44:08.222-0700"
     assert comments[0] == "Test Comment #1"
     assert comments[1] == "Test Comment #2"
+
+def test_post_issue():
+    post_issue("POPS-2575")

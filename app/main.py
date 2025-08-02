@@ -37,6 +37,50 @@ def get_robot_issue(issue_key):
     # return the response as a Python dict
     return response.json()
 
+def post_issue(issue_key, comment_text="This is a default comment."):
+    """
+    Posts a comment to an existing Jira issue.
+    Args:
+        issue_key (str): The unique key of the Jira issue (e.g., "PROJ-123").
+        comment_text (str): The text of the comment to post.
+    Returns:
+        dict: The JSON response from Jira with comment details.
+    Raises:
+        RuntimeError: If the POST request fails.
+    """
+    url = f"{JIRA_URL}{issue_key}/comment"
+    auth = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
+    headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    }
+    
+    # payload must be ADF formated JSON
+    payload = {
+        "body": {
+            "type": "doc",
+            "version": 1,
+            "content": [
+                {
+                    "type": "paragraph",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": comment_text
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+
+    response = requests.post(url, headers=headers, json=payload, auth=auth)
+
+    if not response.ok:
+        raise RuntimeError(f"Failed to post comment: {response.status_code} - {response.text}")
+
+    return response.json()
+
 def extract_description(description_field):
     """
     Extract and concatenate plain text from a Jira description field.
