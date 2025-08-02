@@ -31,13 +31,13 @@ def get_robot_issue(issue_key):
     }
     response = requests.get(url, headers=headers, auth=auth)
 
-    #Raise an error for any status code that isn't 2xx
+    # Raise an error for any status code that isn't 2xx
     response.raise_for_status()
 
     # return the response as a Python dict
     return response.json()
 
-def post_issue(issue_key, comment_text="This is a default comment."):
+def add_comment(issue_key, comment_text="This is a default comment."):
     """
     Posts a comment to an existing Jira issue.
     Args:
