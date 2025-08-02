@@ -13,6 +13,7 @@ JIRA_EMAIL = os.environ["JIRA_EMAIL"]
 JIRA_API_TOKEN = os.environ["JIRA_API_TOKEN"]
 JIRA_DOMAIN = os.environ["JIRA_DOMAIN"]
 JIRA_URL = f"https://{JIRA_DOMAIN}/rest/api/3/issue/"
+AUTH = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
 
 def get_robot_issue(issue_key):
     """
@@ -24,12 +25,11 @@ def get_robot_issue(issue_key):
     Raises:
         RuntimeError: If the request to Jira fails or returns a non-200 status code.
     """
-    auth = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
     url = f"{JIRA_URL}{issue_key}"
     headers = {
         "Accept": "application/json"
     }
-    response = requests.get(url, headers=headers, auth=auth)
+    response = requests.get(url, headers=headers, auth=AUTH)
 
     # Raise an error for any status code that isn't 2xx
     response.raise_for_status()
@@ -47,12 +47,11 @@ def get_comments(issue_key):
     Raises:
         RuntimeError: If no comments are available.
     """
-    auth = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
     headers = {"Accept": "application/json"}
     
     # Fetch all comments
     comments_url = f"{JIRA_URL}{issue_key}/comment"
-    response = requests.get(comments_url, headers=headers, auth=auth)
+    response = requests.get(comments_url, headers=headers, auth=AUTH)
     response.raise_for_status()
     
     # Gets comments, if key is available.  If not, comments is empty list. 
@@ -73,7 +72,6 @@ def add_comment(issue_key, comment_text="This is a default comment."):
         RuntimeError: If the POST request fails.
     """
     url = f"{JIRA_URL}{issue_key}/comment"
-    auth = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json"
@@ -98,7 +96,7 @@ def add_comment(issue_key, comment_text="This is a default comment."):
         }
     }
 
-    response = requests.post(url, headers=headers, json=payload, auth=auth)
+    response = requests.post(url, headers=headers, json=payload, auth=AUTH)
 
     if not response.ok:
         raise RuntimeError(f"Failed to post comment: {response.status_code} - {response.text}")
@@ -115,7 +113,6 @@ def delete_last_comment(issue_key):
         RuntimeError: If fetching or deleting the comment fails.
     """
     comments_url = f"{JIRA_URL}{issue_key}/comment"
-    auth = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
     headers = {
         "Accept": "application/json",
     }
@@ -138,7 +135,7 @@ def delete_last_comment(issue_key):
 
     # Delete most recent comment
     delete_url = f"{comments_url}/{comment_id}"
-    delete_response = requests.delete(delete_url, headers=headers, auth=auth)
+    delete_response = requests.delete(delete_url, headers=headers, auth=AUTH)
     
     if not delete_response.ok:
         raise RuntimeError(f"Failed to delete comment: {delete_response.status_code} - {delete_response.text}")
