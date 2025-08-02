@@ -26,13 +26,7 @@ def test_get_robot_issue():
     assert fields["status"]["name"] == "In Progress"
     assert fields["created"] == "2025-07-22T16:44:08.222-0700"
 
-# def test_add_comment():
-#     add_comment("POPS-2575")
-#
-# def test_delete_last_comment():
-#     delete_last_comment("POPS-2575")
-
-def test_comment():
+def test_comments():
     # Test `add_comment`
     comment_text1 = "testComment1"
     comment_text2 = "testComment2"

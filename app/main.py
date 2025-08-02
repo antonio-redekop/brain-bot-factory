@@ -37,6 +37,30 @@ def get_robot_issue(issue_key):
     # return the response as a Python dict
     return response.json()
 
+def get_comments(issue_key):
+    """
+    Gets all comments from an existing Jira issue
+    Args:
+        issue_key (str): The unique key of the Jira issue (e.g., "PROJ-123").
+    Returns:
+        List of all comments
+    Raises:
+        RuntimeError: If no comments are available.
+    """
+    auth = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
+    headers = {"Accept": "application/json"}
+    
+    # Fetch all comments
+    comments_url = f"{JIRA_URL}{issue_key}/comment"
+    response = requests.get(comments_url, headers=headers, auth=auth)
+    response.raise_for_status()
+    
+    # Gets comments, if key is available.  If not, comments is empty list. 
+    comments = response.json().get("comments", [])
+    if not comments:
+        raise RuntimeError("No comments found on this issue.")
+    return comments
+
 def add_comment(issue_key, comment_text="This is a default comment."):
     """
     Posts a comment to an existing Jira issue.
@@ -90,19 +114,20 @@ def delete_last_comment(issue_key):
     Raises:
         RuntimeError: If fetching or deleting the comment fails.
     """
-    auth = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
-    headers = {"Accept": "application/json"}
-
-    # Fetch all comments
     comments_url = f"{JIRA_URL}{issue_key}/comment"
-    response = requests.get(comments_url, headers=headers, auth=auth)
-    response.raise_for_status()
+    auth = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
+    headers = {
+        "Accept": "application/json",
+    }
 
-    # Gets comments, if key is available.  If not, comments is empty list. 
-    comments = response.json().get("comments", [])
-    
+    # Get comments
+    comments = []
+    try:
+        comments = get_comments(issue_key)
+    except RuntimeError as e:
+        print(f"{e}")
     if not comments:
-        raise RuntimeError("No comments found on this issue.")
+        return
 
     # Identify most recent comment
     # `max` avoids sorting; is more performant
