@@ -2,6 +2,7 @@ import requests
 
 from app.main import get_robot_issue
 from app.main import extract_description
+from app.main import delete_last_comment
 from app.main import post_issue
 
 def test_get_robot_issue():
@@ -34,3 +35,6 @@ def test_get_robot_issue():
 
 def test_post_issue():
     post_issue("POPS-2575")
+
+def test_delete_last_comment():
+    delete_last_comment("POPS-2575")

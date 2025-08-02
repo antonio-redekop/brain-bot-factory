@@ -81,6 +81,45 @@ def post_issue(issue_key, comment_text="This is a default comment."):
 
     return response.json()
 
+def delete_last_comment(issue_key):
+    """
+    Deletes the most recent comment from a Jira issue.
+    Note: Authenticated user must have delete permissions in Jira
+    Args:
+        issue_key (str): The Jira issue key.
+    Raises:
+        RuntimeError: If fetching or deleting the comment fails.
+    """
+    auth = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
+    headers = {"Accept": "application/json"}
+
+    # Fetch all comments
+    comments_url = f"{JIRA_URL}{issue_key}/comment"
+    response = requests.get(comments_url, headers=headers, auth=auth)
+    response.raise_for_status()
+
+    # Gets comments, if key is available.  If not, comments is empty list. 
+    comments = response.json().get("comments", [])
+    
+    if not comments:
+        raise RuntimeError("No comments found on this issue.")
+
+    # Identify most recent comment
+    # `max` avoids sorting; is more performant
+    # both apply `key` callable to each item of iterable prior to evaluation 
+    # last_comment = sorted(comments, key=lambda c: c["created"])[-1]
+    last_comment = max(comments, key=lambda c: c["created"])
+    comment_id = last_comment["id"]
+
+    # Delete most recent comment
+    delete_url = f"{comments_url}/{comment_id}"
+    delete_response = requests.delete(delete_url, headers=headers, auth=auth)
+    
+    if not delete_response.ok:
+        raise RuntimeError(f"Failed to delete comment: {delete_response.status_code} - {delete_response.text}")
+    
+    print(f"Deleted comment ID {comment_id} from issue {issue_key}.")
+
 def extract_description(description_field):
     """
     Extract and concatenate plain text from a Jira description field.
