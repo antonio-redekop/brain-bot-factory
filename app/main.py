@@ -111,8 +111,7 @@ def delete_last_comment(issue_key):
     Raises:
         RuntimeError: If fetching or deleting the comment fails.
     """
-    # comments_url = f"{JIRA_URL}{issue_key}/comment"
-    url = f"{issue_key}/comment"
+    comments_url = f"{issue_key}/comment"
 
     # Get comments
     comments = get_comments(issue_key)
@@ -127,7 +126,7 @@ def delete_last_comment(issue_key):
     comment_id = last_comment["id"]
 
     # Delete most recent comment
-    delete_url = f"{url}/{comment_id}"
+    delete_url = f"{comments_url}/{comment_id}"
     jira_request("DELETE", delete_url) 
     print(f"Deleted comment ID {comment_id} from issue {issue_key}.")
 
