@@ -82,23 +82,8 @@ def add_comment(issue_key, comment_text="This is a default comment."):
     comment_url = f"{issue_key}/comment"
     
     # payload must be ADF formated JSON
-    payload = {
-        "body": {
-            "type": "doc",
-            "version": 1,
-            "content": [
-                {
-                    "type": "paragraph",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": comment_text
-                        }
-                    ]
-                }
-            ]
-        }
-    }
+    payload = build_adf_comment_body(comment_text)
+
     response = jira_request("POST", comment_url, payload)
     return response.json()
 
@@ -179,3 +164,18 @@ def extract_description(description_field):
                 if inner_block.get("type") == "text":
                     description_text += inner_block.get("text", "") + "\n"
     return description_text.strip()
+
+def build_adf_comment_body(text):
+    """Constructs an ADF-formatted JSON payload for a Jira comment."""
+    return {
+        "body": {
+            "type": "doc",
+            "version": 1,
+            "content": [
+                {
+                    "type": "paragraph",
+                    "content": [{"type": "text", "text": text}]
+                }
+            ]
+        }
+    }
