@@ -15,6 +15,27 @@ JIRA_DOMAIN = os.environ["JIRA_DOMAIN"]
 JIRA_URL = f"https://{JIRA_DOMAIN}/rest/api/3/issue/"
 AUTH = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
 
+def jira_request(method, endpoint, json_payload=None):
+    headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+    }
+    url = f"{JIRA_URL}{endpoint}"
+
+    # requests.request always returns response object; does not raise exceptions
+    response = requests.request(method, url, headers=headers, json=json_payload, auth=AUTH)
+    try:
+        # `raise_for_status` preserves response object, unlike manually raising
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        # HTTPError does not auto include the response object; must attach manually
+        # `from e` preserves the original error object, since we are re-raising
+        raise requests.exceptions.HTTPError(
+            f"Jira API {method} request failed: {response.status_code} - {response.text}",
+            response = response,
+        ) from e
+    return response
+
 def get_robot_issue(issue_key):
     """
     Fetches a Jira issue using the provided issue key.
@@ -22,19 +43,9 @@ def get_robot_issue(issue_key):
         issue_key (str): The unique identifier for the Jira issue.
     Returns:
         dict: The Jira issue data parsed as a JSON object.
-    Raises:
-        RuntimeError: If the request to Jira fails or returns a non-200 status code.
     """
-    url = f"{JIRA_URL}{issue_key}"
-    headers = {
-        "Accept": "application/json"
-    }
-    response = requests.get(url, headers=headers, auth=AUTH)
-
-    # Raise an error for any status code that isn't 2xx
-    response.raise_for_status()
-
-    # return the response as a Python dict
+    issue_url = f"{issue_key}"
+    response = jira_request("GET", issue_url)
     return response.json()
 
 def get_comments(issue_key):
@@ -44,20 +55,15 @@ def get_comments(issue_key):
         issue_key (str): The unique key of the Jira issue (e.g., "PROJ-123").
     Returns:
         List of all comments
-    Raises:
-        RuntimeError: If no comments are available.
     """
-    headers = {"Accept": "application/json"}
-    
     # Fetch all comments
-    comments_url = f"{JIRA_URL}{issue_key}/comment"
-    response = requests.get(comments_url, headers=headers, auth=AUTH)
-    response.raise_for_status()
+    comments_url = f"{issue_key}/comment"
+    response = jira_request("GET", comments_url)
     
-    # Gets comments, if key is available.  If not, comments is empty list. 
+    # Gets comments, if key is available, else returns empty list
     comments = response.json().get("comments", [])
     if not comments:
-        raise RuntimeError("No comments found on this issue.")
+        print(f"No comments found for issue {issue_key}.")
     return comments
 
 def add_comment(issue_key, comment_text="This is a default comment."):
@@ -68,14 +74,8 @@ def add_comment(issue_key, comment_text="This is a default comment."):
         comment_text (str): The text of the comment to post.
     Returns:
         dict: The JSON response from Jira with comment details.
-    Raises:
-        RuntimeError: If the POST request fails.
     """
-    url = f"{JIRA_URL}{issue_key}/comment"
-    headers = {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-    }
+    comment_url = f"{issue_key}/comment"
     
     # payload must be ADF formated JSON
     payload = {
@@ -95,12 +95,7 @@ def add_comment(issue_key, comment_text="This is a default comment."):
             ]
         }
     }
-
-    response = requests.post(url, headers=headers, json=payload, auth=AUTH)
-
-    if not response.ok:
-        raise RuntimeError(f"Failed to post comment: {response.status_code} - {response.text}")
-
+    response = jira_request("POST", comment_url, payload)
     return response.json()
 
 def delete_last_comment(issue_key):
@@ -112,17 +107,11 @@ def delete_last_comment(issue_key):
     Raises:
         RuntimeError: If fetching or deleting the comment fails.
     """
-    comments_url = f"{JIRA_URL}{issue_key}/comment"
-    headers = {
-        "Accept": "application/json",
-    }
+    # comments_url = f"{JIRA_URL}{issue_key}/comment"
+    url = f"{issue_key}/comment"
 
     # Get comments
-    comments = []
-    try:
-        comments = get_comments(issue_key)
-    except RuntimeError as e:
-        print(f"{e}")
+    comments = get_comments(issue_key)
     if not comments:
         return
 
@@ -134,12 +123,8 @@ def delete_last_comment(issue_key):
     comment_id = last_comment["id"]
 
     # Delete most recent comment
-    delete_url = f"{comments_url}/{comment_id}"
-    delete_response = requests.delete(delete_url, headers=headers, auth=AUTH)
-    
-    if not delete_response.ok:
-        raise RuntimeError(f"Failed to delete comment: {delete_response.status_code} - {delete_response.text}")
-    
+    delete_url = f"{url}/{comment_id}"
+    jira_request("DELETE", delete_url) 
     print(f"Deleted comment ID {comment_id} from issue {issue_key}.")
 
 def extract_description(description_field):
