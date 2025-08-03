@@ -56,6 +56,8 @@ def get_comments(issue_key):
     Returns:
         List of all comments
     """
+    robot_data = get_robot_issue(issue_key)
+    
     # Fetch all comments
     comments_url = f"{issue_key}/comment"
     response = jira_request("GET", comments_url)
@@ -64,7 +66,9 @@ def get_comments(issue_key):
     comments = response.json().get("comments", [])
     if not comments:
         print(f"No comments found for issue {issue_key}.")
-    return comments
+    parsed_comments = [parse_jira_comment(c) for c in comments] 
+
+    return parsed_comments
 
 def add_comment(issue_key, comment_text="This is a default comment."):
     """
@@ -126,6 +130,39 @@ def delete_last_comment(issue_key):
     delete_url = f"{url}/{comment_id}"
     jira_request("DELETE", delete_url) 
     print(f"Deleted comment ID {comment_id} from issue {issue_key}.")
+
+def parse_jira_comment(comment):
+    """
+    Parses Jira comment object and extracts key metadata.
+    Args:
+        comment (dict): A Jira comment object in ADF format.
+    Returns:
+        dict: extracted metadata 
+    """
+    # Extract the plain text from the ADF content
+    def extract_text(adf_body):
+        if adf_body.get("type") != "doc":
+            return ""
+        lines = []
+        for block in adf_body.get("content", []):
+            if block.get("type") == "paragraph":
+                text = ""
+                for inner in block.get("content", []):
+                    if inner.get("type") == "text":
+                        text += inner.get("text", "")
+                lines.append(text)
+        return "\n".join(lines).strip()
+
+    return {
+        "id": comment.get("id"),
+        "text": extract_text(comment.get("body", {})),
+        "author_name": comment.get("author", {}).get("displayName"),
+        "author_email": comment.get("author", {}).get("emailAddress"),
+        "created": comment.get("created"),
+        "updated": comment.get("updated"),
+        "public": comment.get("jsdPublic"),
+        "url": comment.get("self"),
+    }
 
 def extract_description(description_field):
     """

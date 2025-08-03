@@ -3,6 +3,7 @@ import requests
 from app.main import get_robot_issue
 from app.main import extract_description
 from app.main import add_comment
+from app.main import get_comments
 from app.main import delete_last_comment
 
 def test_get_robot_issue():
@@ -28,17 +29,9 @@ def test_comments():
     comment_text2 = "testComment2"
     add_comment("POPS-2575", comment_text1) 
     add_comment("POPS-2575", comment_text2) 
-
-    # Get robot issue
-    robot_issue = get_robot_issue("POPS-2575"); # <--- known good issue key
-
-    fields = robot_issue["fields"]
-    # Extract a list of comments
-    comments = [
-        c["body"]["content"][0]["content"][0]["text"] for c in fields["comment"]["comments"]
-    ]
-    assert comments[0] == "testComment1"
-    assert comments[1] == "testComment2"
+    comments = get_comments("POPS-2575")
+    assert comments[0].get("text") == "testComment1"
+    assert comments[1].get("text") == "testComment2"
 
     # Test `delete_last_comment`
     delete_last_comment("POPS-2575")
