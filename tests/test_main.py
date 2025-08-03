@@ -9,13 +9,9 @@ def test_get_robot_issue():
     try:
         robot_issue = get_robot_issue("POPS-9999"); # <--- non-existent issue key; should return 404
     except requests.exceptions.HTTPError as e:
-        if e.response.status_code != 404:
-            raise
-    try:
-        robot_issue = get_robot_issue("POPS-2575"); # <--- known good issue key
-    except requests.exceptions.HTTPError as e:
-        print(f"Failed to get robot issue: {e}")
-        raise
+        assert e.response is not None, "Expected response in HTTPError, got None"
+        assert e.response.status_code == 404
+    robot_issue = get_robot_issue("POPS-2575"); # <--- known good issue key
     fields = robot_issue["fields"]
     assignee = fields["assignee"]["displayName"] if fields["assignee"] else "Unassigned"
     description = extract_description(fields["description"])
@@ -34,13 +30,9 @@ def test_comments():
     add_comment("POPS-2575", comment_text2) 
 
     # Get robot issue
-    try:
-        robot_issue = get_robot_issue("POPS-2575"); # <--- known good issue key
-    except requests.exceptions.HTTPError as e:
-        print(f"Failed to get robot issue: {e}")
-        raise
-    fields = robot_issue["fields"]
+    robot_issue = get_robot_issue("POPS-2575"); # <--- known good issue key
 
+    fields = robot_issue["fields"]
     # Extract a list of comments
     comments = [
         c["body"]["content"][0]["content"][0]["text"] for c in fields["comment"]["comments"]
