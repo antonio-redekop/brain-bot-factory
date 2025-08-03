@@ -6,13 +6,16 @@ from app.main import add_comment
 from app.main import get_comments
 from app.main import delete_last_comment
 
+JIRA_TEST_ISSUE = "POPS-2575"
+JIRA_TEST_ISSUE_BAD = "POPS-9999"
+
 def test_get_robot_issue():
     try:
-        robot_issue = get_robot_issue("POPS-9999"); # <--- non-existent issue key; should return 404
+        robot_issue = get_robot_issue(JIRA_TEST_ISSUE_BAD); # <--- non-existent issue key; should return 404
     except requests.exceptions.HTTPError as e:
         assert e.response is not None, "Expected response in HTTPError, got None"
         assert e.response.status_code == 404
-    robot_issue = get_robot_issue("POPS-2575"); # <--- known good issue key
+    robot_issue = get_robot_issue(JIRA_TEST_ISSUE); # <--- known good issue key
     fields = robot_issue["fields"]
     assignee = fields["assignee"]["displayName"] if fields["assignee"] else "Unassigned"
     description = extract_description(fields["description"])
@@ -27,12 +30,12 @@ def test_comments():
     # Test `add_comment`
     comment_text1 = "testComment1"
     comment_text2 = "testComment2"
-    add_comment("POPS-2575", comment_text1) 
-    add_comment("POPS-2575", comment_text2) 
-    comments = get_comments("POPS-2575")
+    add_comment(JIRA_TEST_ISSUE, comment_text1) 
+    add_comment(JIRA_TEST_ISSUE, comment_text2) 
+    comments = get_comments(JIRA_TEST_ISSUE)
     assert comments[0].get("text") == "testComment1"
     assert comments[1].get("text") == "testComment2"
 
     # Test `delete_last_comment`
-    delete_last_comment("POPS-2575")
-    delete_last_comment("POPS-2575")
+    delete_last_comment(JIRA_TEST_ISSUE)
+    delete_last_comment(JIRA_TEST_ISSUE)
