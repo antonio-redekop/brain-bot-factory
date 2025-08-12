@@ -8,6 +8,9 @@ from app.main import delete_last_comment
 
 JIRA_TEST_ISSUE = "POPS-2575"
 JIRA_TEST_ISSUE_BAD = "POPS-9999"
+JIRA_MASTER_ROBOT_RECORD = "POPS-2632"
+JIRA_MASTER_ROUTING_RECORD = "POPS-2633"
+QR_TEST_PAYLOAD = { "rin": "BC033W000008NH" }
 
 def test_get_robot_issue():
     try:
@@ -18,8 +21,7 @@ def test_get_robot_issue():
     robot_issue = get_robot_issue(JIRA_TEST_ISSUE); # <--- known good issue key
     fields = robot_issue["fields"]
     assignee = fields["assignee"]["displayName"] if fields["assignee"] else "Unassigned"
-    description = extract_description(fields["description"])
-
+    description = extract_description(robot_issue)
     assert description == "Here is line #1 of the description\nHere is line #2 of the description"
     assert assignee == "Antonio Redekop"
     assert fields["summary"] == "Jaeger Test Ticket - Do Not Use"

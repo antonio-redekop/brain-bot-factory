@@ -56,7 +56,6 @@ def get_comments(issue_key):
     Returns:
         List of all comments
     """
-    robot_data = get_robot_issue(issue_key)
     
     # Fetch all comments
     comments_url = f"{issue_key}/comment"
@@ -148,15 +147,17 @@ def parse_jira_comment(comment):
         "url": comment.get("self"),
     }
 
-def extract_description(description_field):
+def extract_description(robot_record):
     """
-    Extract and concatenate plain text from a Jira description field.
+    Extract and concatenate plain text from a Jira description field within a robot record.
     The description field uses Atlassian Document Format (ADF), a nested JSON structure.
     Args:
-        description_field (dict): JSON structure of the description field from Jira issue.
+        robot_record: ADF representation of a Jira issue
     Returns:
         str: Complete plain-text representation of the description, with blocks separated by newlines.
     """
+    # description_field (dict): JSON structure of the description field from Jira issue (robot_record)
+    description_field = robot_record["fields"]["description"]
     description_text = ""
     for block in description_field["content"]:
         if "content" in block:
