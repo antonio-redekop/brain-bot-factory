@@ -1,6 +1,6 @@
 import requests
 
-from app.main import get_robot_issue
+from app.main import get_robot_record
 from app.main import extract_description
 from app.main import add_comment
 from app.main import get_comments
@@ -12,16 +12,16 @@ JIRA_MASTER_ROBOT_RECORD = "POPS-2632"
 JIRA_MASTER_ROUTING_RECORD = "POPS-2633"
 QR_TEST_PAYLOAD = { "rin": "BC033W000008NH" }
 
-def test_get_robot_issue():
+def test_get_robot_record():
     try:
-        robot_issue = get_robot_issue(JIRA_TEST_ISSUE_BAD); # <--- non-existent issue key; should return 404
+        robot_record = get_robot_record(JIRA_TEST_ISSUE_BAD); # <--- non-existent issue key; should return 404
     except requests.exceptions.HTTPError as e:
         assert e.response is not None, "Expected response in HTTPError, got None"
         assert e.response.status_code == 404
-    robot_issue = get_robot_issue(JIRA_TEST_ISSUE); # <--- known good issue key
-    fields = robot_issue["fields"]
+    robot_record = get_robot_record(JIRA_TEST_ISSUE); # <--- known good issue key
+    fields = robot_record["fields"]
     assignee = fields["assignee"]["displayName"] if fields["assignee"] else "Unassigned"
-    description = extract_description(robot_issue)
+    description = extract_description(robot_record)
     assert description == "Here is line #1 of the description\nHere is line #2 of the description"
     assert assignee == "Antonio Redekop"
     assert fields["summary"] == "Jaeger Test Ticket - Do Not Use"

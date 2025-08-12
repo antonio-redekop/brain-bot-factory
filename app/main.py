@@ -36,9 +36,9 @@ def jira_request(method, endpoint, json_payload=None):
         ) from e
     return response
 
-def get_robot_issue(issue_key):
+def get_robot_record(issue_key):
     """
-    Fetches a Jira issue using the provided issue key.
+    Fetches a Robot Record (Jira issue) using the provided issue key.
     Args:
         issue_key (str): The unique identifier for the Jira issue.
     Returns:
