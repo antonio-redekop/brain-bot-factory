@@ -1,11 +1,12 @@
 import requests
 
 from app.main import get_robot_record
-from app.main import extract_description
 from app.main import add_comment
 from app.main import get_comments
 from app.main import delete_last_comment
 from app.main import read_attachment
+
+from jira_tools.adf import parse_adf_description
 
 JIRA_TEST_ISSUE = "POPS-2575"
 JIRA_TEST_ISSUE_BAD = "POPS-9999"
@@ -23,7 +24,7 @@ def test_get_robot_record():
     robot_record = get_robot_record(JIRA_TEST_ISSUE); # <--- known good issue key
     fields = robot_record["fields"]
     assignee = fields["assignee"]["displayName"] if fields["assignee"] else "Unassigned"
-    description = extract_description(robot_record)
+    description = parse_adf_description(robot_record)
     assert description == "Here is line #1 of the description\nHere is line #2 of the description"
     assert assignee == "Antonio Redekop"
     assert fields["summary"] == "Jaeger Test Ticket - Do Not Use"
