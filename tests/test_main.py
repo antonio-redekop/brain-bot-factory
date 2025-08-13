@@ -1,8 +1,9 @@
 import requests
-
-from app.main import get_robot_record, read_attachment
 from jira_tools.adf import parse_adf_description
+from jira_tools.services.issues import get_robot_record
 from jira_tools.services.comments import delete_last_comment, get_comments, add_comment, delete_last_comment
+from jira_tools.services.attachments import read_attachment
+
 
 JIRA_TEST_ISSUE = "POPS-2575"
 JIRA_TEST_ISSUE_BAD = "POPS-9999"
