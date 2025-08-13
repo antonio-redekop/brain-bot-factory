@@ -1,7 +1,7 @@
 from jira_tools.http import get_json
 from jira_tools.services.issues import get_robot_record
 
-def read_attachment(issue_key: str) -> dict:
+def get_first_json_attachment(issue_key: str) -> dict:
     """
     Reads the contents of a single JSON attachment attached to a Jira issue.
     Returns the parsed JSON of the first attachment.
