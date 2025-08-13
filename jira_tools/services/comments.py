@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from jira_tools.http import get_json, post_json, delete as http_delete
 from jira_tools.adf import build_adf_comment_body, parse_adf_comment
