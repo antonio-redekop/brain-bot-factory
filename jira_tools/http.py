@@ -1,25 +1,6 @@
-import os
 import requests
-from requests.auth import HTTPBasicAuth
-from dotenv import load_dotenv
 from typing import Any, Mapping, Optional
-
-# Load environment variables for local/dev usage only
-# In prod, API token storage will be in a scoped variable, taken from user input
-# In prod, Third-party PWM will be used for management of tokens
-load_dotenv()
-
-# Configuration
-JIRA_EMAIL = os.environ["JIRA_EMAIL"]
-JIRA_API_TOKEN = os.environ["JIRA_API_TOKEN"]
-JIRA_DOMAIN = os.environ["JIRA_DOMAIN"]
-JIRA_BASE_URL = f"https://{JIRA_DOMAIN}/rest/api/3/issue/"
-AUTH = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
-
-DEFAULT_HEADERS = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
+from jira_tools import config
 
 class JiraHttpError(requests.exceptions.HTTPError):
     """Raised when Jira API returns an error response."""
@@ -38,8 +19,8 @@ def jira_request(
     Raises:
         JiraHttpError: If Jira responds with a 4xx/5xx status code.
     """
-    merged_headers = {**DEFAULT_HEADERS, **(headers or {})}
-    url = f"{JIRA_BASE_URL}{endpoint}" 
+    merged_headers = {**config.DEFAULT_HEADERS, **(headers or {})}
+    url = f"{config.JIRA_BASE_URL}{endpoint}" 
 
     # requests.request always returns response object; does not raise exceptions
     resp = requests.request(
@@ -47,7 +28,7 @@ def jira_request(
         url,
         headers=merged_headers,
         json=json_payload,
-        auth=AUTH,
+        auth=config.AUTH,
         timeout=timeout)
     try:
         # `raise_for_status` preserves response object, unlike manually raising
