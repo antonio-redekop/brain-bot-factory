@@ -8,12 +8,6 @@ from jira_tools.http import get_json
 from jira_tools.http import post_json
 from jira_tools.http import delete
 
-JIRA_EMAIL = os.environ["JIRA_EMAIL"] 
-JIRA_API_TOKEN = os.environ["JIRA_API_TOKEN"]
-JIRA_DOMAIN = os.environ["JIRA_DOMAIN"]
-JIRA_URL = f"https://{JIRA_DOMAIN}/rest/api/3/issue/"
-AUTH = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
-
 MASTER_ROUTING_RECORD_KEY = "POPS-2633"
 
 def get_robot_record(issue_key):
@@ -161,38 +155,16 @@ def build_adf_comment_body(text):
         }
     }
 
-def read_attachment(issue_key):
+def read_attachment(issue_key: str) -> dict:
     """
     Reads the contents of a single JSON attachment attached to a Jira issue.
-    Args:
-        issue_key (str): Jira issue key
-    Returns:
-        dict: Parsed JSON contents of the attachment.
-    Raises:
-        ValueError: If the issue has no attachments.
-        HTTPError: If the download request fails.
+    Returns the parsed JSON of the first attachment.
     """
-    auth = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
-
     data = get_robot_record(issue_key)
-    attachments = data["fields"]["attachment"]
-    
+    attachments = (data.get("fields", {}).get("attachment")) or []
     if not attachments:
         raise ValueError("No attachments found.")
 
-    # Get first attachment's download URL
-    attachment_link = attachments[0]["content"]
-
-    # Download the JSON
-    response = requests.get(
-        attachment_link,
-        auth=auth,
-        headers={},  # no "Accept: application/json" — we want raw file bytes
-        allow_redirects=True,
-        timeout=30
-    )
-    response.raise_for_status()
-
-    # Parse JSON into scoped variable
-    attachment_data = json.loads(response.content)
-    return attachment_data
+    attachment_id = attachments[0]["id"]
+    # Hop up one level from issue/ to attachment/ content endpoint
+    return get_json(f"../attachment/content/{attachment_id}", headers={}, timeout=30)
