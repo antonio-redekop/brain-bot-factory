@@ -4,11 +4,9 @@ from dotenv import load_dotenv
 import os
 import json
 
-# Load environment variables from .env file in project root
-# This implementation for dev only.
-# In prod, API token storage will be in a scoped variable, taken from user input
-# Third-party PWM will be used for management of tokens
-load_dotenv()
+from jira_tools.http import get_json
+from jira_tools.http import post_json
+from jira_tools.http import delete
 
 JIRA_EMAIL = os.environ["JIRA_EMAIL"] 
 JIRA_API_TOKEN = os.environ["JIRA_API_TOKEN"]
@@ -17,27 +15,6 @@ JIRA_URL = f"https://{JIRA_DOMAIN}/rest/api/3/issue/"
 AUTH = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
 
 MASTER_ROUTING_RECORD_KEY = "POPS-2633"
-
-def jira_request(method, endpoint, json_payload=None):
-    headers = {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-    }
-    url = f"{JIRA_URL}{endpoint}"
-
-    # requests.request always returns response object; does not raise exceptions
-    response = requests.request(method, url, headers=headers, json=json_payload, auth=AUTH)
-    try:
-        # `raise_for_status` preserves response object, unlike manually raising
-        response.raise_for_status()
-    except requests.exceptions.HTTPError as e:
-        # HTTPError does not auto include the response object; must attach manually
-        # `from e` preserves the original error object, since we are re-raising
-        raise requests.exceptions.HTTPError(
-            f"Jira API {method} request failed: {response.status_code} - {response.text}",
-            response = response,
-        ) from e
-    return response
 
 def get_robot_record(issue_key):
     """
@@ -48,8 +25,8 @@ def get_robot_record(issue_key):
         dict: The Jira issue data parsed as a JSON object.
     """
     issue_url = f"{issue_key}"
-    response = jira_request("GET", issue_url)
-    return response.json()
+    response = get_json(issue_url)
+    return response
 
 def get_comments(issue_key):
     """
@@ -62,10 +39,10 @@ def get_comments(issue_key):
     
     # Fetch all comments
     comments_url = f"{issue_key}/comment"
-    response = jira_request("GET", comments_url)
+    response = get_json(comments_url)
     
     # Gets comments, if key is available, else returns empty list
-    comments = response.json().get("comments", [])
+    comments = response.get("comments", [])
     if not comments:
         print(f"No comments found for issue {issue_key}.")
     parsed_comments = [parse_jira_comment(c) for c in comments] 
@@ -86,8 +63,8 @@ def add_comment(issue_key, comment_text="This is a default comment."):
     # payload must be ADF formated JSON
     payload = build_adf_comment_body(comment_text)
 
-    response = jira_request("POST", comment_url, payload)
-    return response.json()
+    response = post_json(comment_url, payload)
+    return response
 
 def delete_last_comment(issue_key):
     """
@@ -114,7 +91,7 @@ def delete_last_comment(issue_key):
 
     # Delete most recent comment
     delete_url = f"{comments_url}/{comment_id}"
-    jira_request("DELETE", delete_url) 
+    delete(delete_url)
     print(f"Deleted comment ID {comment_id} from issue {issue_key}.")
 
 def parse_jira_comment(comment):
