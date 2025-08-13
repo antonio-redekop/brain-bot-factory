@@ -15,6 +15,8 @@ JIRA_DOMAIN = os.environ["JIRA_DOMAIN"]
 JIRA_URL = f"https://{JIRA_DOMAIN}/rest/api/3/issue/"
 AUTH = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
 
+MASTER_ROUTING_RECORD_KEY = "POPS-2633"
+
 def jira_request(method, endpoint, json_payload=None):
     headers = {
         "Accept": "application/json",
@@ -180,3 +182,15 @@ def build_adf_comment_body(text):
             ]
         }
     }
+
+def read_attachment(key = MASTER_ROUTING_RECORD_KEY):
+    """Reads a .JSON attachment from a robot_record and returns a dict of contents"""
+    data = get_robot_record(key)
+    attachments = data["fields"]["attachment"]
+    
+    if not attachments:
+        raise ValueError("No attachments found.")
+
+    attachment_link = attachments[0]["content"]  # first attachment]
+    print(attachment_link)
+    return attachment_link
