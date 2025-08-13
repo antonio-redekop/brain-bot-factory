@@ -2,6 +2,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 from dotenv import load_dotenv
 import os
+import json
 
 # Load environment variables from .env file in project root
 # This implementation for dev only.
@@ -183,14 +184,38 @@ def build_adf_comment_body(text):
         }
     }
 
-def read_attachment(key = MASTER_ROUTING_RECORD_KEY):
-    """Reads a .JSON attachment from a robot_record and returns a dict of contents"""
-    data = get_robot_record(key)
+def read_attachment(issue_key):
+    """
+    Reads the contents of a single JSON attachment attached to a Jira issue.
+    Args:
+        issue_key (str): Jira issue key
+    Returns:
+        dict: Parsed JSON contents of the attachment.
+    Raises:
+        ValueError: If the issue has no attachments.
+        HTTPError: If the download request fails.
+    """
+    auth = HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN)
+
+    data = get_robot_record(issue_key)
     attachments = data["fields"]["attachment"]
     
     if not attachments:
         raise ValueError("No attachments found.")
 
-    attachment_link = attachments[0]["content"]  # first attachment]
-    print(attachment_link)
-    return attachment_link
+    # Get first attachment's download URL
+    attachment_link = attachments[0]["content"]
+
+    # Download the JSON
+    response = requests.get(
+        attachment_link,
+        auth=auth,
+        headers={},  # no "Accept: application/json" — we want raw file bytes
+        allow_redirects=True,
+        timeout=30
+    )
+    response.raise_for_status()
+
+    # Parse JSON into scoped variable
+    attachment_data = json.loads(response.content)
+    return attachment_data

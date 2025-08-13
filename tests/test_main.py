@@ -11,7 +11,6 @@ JIRA_TEST_ISSUE = "POPS-2575"
 JIRA_TEST_ISSUE_BAD = "POPS-9999"
 JIRA_MASTER_ROBOT_RECORD = "POPS-2632"
 JIRA_MASTER_ROUTING_RECORD = "POPS-2633"
-ATTACHMENT_TEST_LINK = "https://braincorporation.atlassian.net/rest/api/3/attachment/content/227515"
 
 QR_TEST_PAYLOAD = { "rin": "BC033W000008NH" }
 
@@ -46,4 +45,4 @@ def test_comments():
     delete_last_comment(JIRA_TEST_ISSUE)
 
 def test_read_attachment():
-    assert(read_attachment() == "https://braincorporation.atlassian.net/rest/api/3/attachment/content/227515")
+    assert(read_attachment(JIRA_MASTER_ROUTING_RECORD)["JAG-0001"] == "BC033W000002RX")
