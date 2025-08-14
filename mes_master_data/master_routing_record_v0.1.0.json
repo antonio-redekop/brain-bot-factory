@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0",
+  "masterRoutingRecord": [
+    {
+      "version": "0.1.0",
+      "effectivity": "0001-0086",
+      "eco": "ECO-000000",
+      "releasedAt": "2025-08-13T17:30:00Z",
+      "releasedBy": "antonio.redekop@braincorp.com",
+      "notes": "Initial release for JAG-0001..0086.",
+      "operations": [
+        {
+          "sequence": 1,
+          "operationId": "OP-001",
+          "operationName": "Assemble Base",
+          "standardWork": "https://link.to/standard-work/assemble-base"
+        },
+        {
+          "sequence": 2,
+          "operationId": "OP-002",
+          "operationName": "Assemble Tower",
+          "standardWork": "https://link.to/standard-work/assemble-tower"
+        }
+      ]
+    }
+  ]
+}
