@@ -3,13 +3,25 @@ from jira_tools.adf import parse_adf_description
 from jira_tools.services.issues import get_robot_record
 from jira_tools.services.comments import delete_last_comment, get_comments, add_comment, delete_last_comment
 from jira_tools.services.attachments import get_first_json_attachment
+from jira_tools.services.access_robot import lookup_robot
 
 JIRA_TEST_ISSUE = "POPS-2575"
 JIRA_TEST_ISSUE_BAD = "POPS-9999"
 JIRA_MASTER_ROBOT_RECORD = "POPS-2632"
 JIRA_MASTER_ROUTING_RECORD = "POPS-2633"
 
-QR_TEST_PAYLOAD = { "rin": "BC033W000008NH" }
+TEST_RIN = "BC033W000667DJ"    # maps to JAG-0666 in MRR
+TEST_PID = "JAG-0666"
+QR_TEST_PAYLOAD = { "rin": TEST_RIN }
+
+def test_get_first_json_attachment():
+    assert(get_first_json_attachment(JIRA_MASTER_ROBOT_RECORD)[TEST_RIN] == TEST_PID)
+
+def test_lookup_robot():
+    assert(lookup_robot(
+        QR_TEST_PAYLOAD,
+        mrr_issue_key = JIRA_MASTER_ROBOT_RECORD
+    ) == TEST_PID)
 
 def test_get_robot_record():
     try:
@@ -40,6 +52,3 @@ def test_comments():
     # Test `delete_last_comment`
     delete_last_comment(JIRA_TEST_ISSUE)
     delete_last_comment(JIRA_TEST_ISSUE)
-
-def test_get_first_json_attachment():
-    assert(get_first_json_attachment(JIRA_MASTER_ROUTING_RECORD)["JAG-0001"] == "BC033W000002RX")
