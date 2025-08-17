@@ -11,17 +11,17 @@ JIRA_MASTER_ROBOT_RECORD = "POPS-2632"
 JIRA_MASTER_ROUTING_RECORD = "POPS-2633"
 
 TEST_RIN = "BC033W000667DJ"    # maps to JAG-0666 in MRR
-TEST_PID = "JAG-0666"
+TEST_ROBOT_PID = "JAG-0666"
 QR_TEST_PAYLOAD = { "rin": TEST_RIN }
 
 def test_get_first_json_attachment():
-    assert(get_first_json_attachment(JIRA_MASTER_ROBOT_RECORD)[TEST_RIN] == TEST_PID)
+    assert(get_first_json_attachment(JIRA_MASTER_ROBOT_RECORD)[TEST_RIN] == TEST_ROBOT_PID)
 
 def test_lookup_robot():
     assert(lookup_robot(
         QR_TEST_PAYLOAD,
         mrr_issue_key = JIRA_MASTER_ROBOT_RECORD
-    ) == TEST_PID)
+    ) == TEST_ROBOT_PID)
 
 def test_get_robot_record():
     try:
