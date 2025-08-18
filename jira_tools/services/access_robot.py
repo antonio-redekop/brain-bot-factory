@@ -1,5 +1,4 @@
 import re
-import json
 from typing import Dict, Tuple, List, Any
 
 from jira_tools.services.attachments import get_first_json_attachment
@@ -41,7 +40,7 @@ def lookup_robot(payload: Dict[str, str], *, mrr_issue_key: str) -> str:
     # Load the attachment JSON from the Master Robot Record issue
     mrr_json = get_first_json_attachment(mrr_issue_key)
     if not isinstance(mrr_json, dict) or not mrr_json:
-        raise ValueError("Master Robot Record attachment must be a non-empty JSON object (RIN -> robotId).")
+        raise ValueError("Master Robot Record attachment must be a non-empty JSON object (RIN -> robotPid).")
     try:
         return str(mrr_json[rin])
     except KeyError as e:
@@ -68,7 +67,7 @@ def _get_robot_seq(robot_pid: str) -> int:
     # But in this case, we anchor to the end of the string
     m = re.search(r"(\d{4})$", robot_pid)
     if not m:
-        raise ValueError(f"robotId '{robot_pid}' must end with 4 digits (e.g., JAG-0007).")
+        raise ValueError(f"robotPid '{robot_pid}' must end with 4 digits (e.g., JAG-0007).")
     return int(m.group(1))
 
 def fetch_routing(robot_pid: str, *, mroute_issue_key: str) -> Dict[str, Any]:
