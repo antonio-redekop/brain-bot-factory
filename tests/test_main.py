@@ -3,7 +3,7 @@ from jira_tools.adf import parse_adf_description
 from jira_tools.services.issues import get_robot_record
 from jira_tools.services.comments import delete_last_comment, get_comments, add_comment, delete_last_comment
 from jira_tools.services.attachments import get_first_json_attachment
-from jira_tools.services.access_robot import lookup_robot
+from jira_tools.services.access_robot import lookup_robot, build_robot_history
 
 JIRA_TEST_ISSUE = "POPS-2575"
 JIRA_TEST_ISSUE_BAD = "POPS-9999"
@@ -38,6 +38,9 @@ def test_get_robot_record():
     assert fields["summary"] == "Jaeger Test Ticket - Do Not Use"
     assert fields["status"]["name"] == "In Progress"
     assert fields["created"] == "2025-07-22T16:44:08.222-0700"
+
+def test_build_robot_history():
+    assert(build_robot_history(JIRA_TEST_ISSUE)[0].get("eventType") == "OPERATION_COMPLETE")
 
 def test_comments():
     # Test `add_comment`
