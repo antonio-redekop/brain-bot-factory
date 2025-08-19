@@ -8,30 +8,29 @@
 
 ## Workmanship Standards
 
-- Avoid fastener and assembly preload during installation.
-- Avoid cross-threading fasteners.
+- Take care to avoid fastener preload.
+- Take care to avoid cross-threading fasteners.
 - Take special care when installing steel bolts into aluminum (e.g. B3CM)
-- Fastener installation to be performed in (2) steps when using hand tools:
-    1. Tighten to achieve clamp up
-    2. Tighten to achieve clamp up then apply final torque
 - Utilize star pattern when tightening and torquing where applicable.
-- Screwdriver torque settings:
-    - [Makita: 13-15](img/makita.png)
-    - [Milwaukee: 13-15](img/milwaukee.png)
-- Ensure fasteners are tight, maintaining designed torques. 
-- Torque wheel nuts to 25 Nm.
-- If no torque is provided in the Drawing or Work Instructions, reference the following table(s):
-    
-**For dry (unlubricated) A2-70 stainless-steel bolts:**
+- When using hand tools:
+    - Fastener installation to be performed in (2) steps when using hand tools:
+        1. Tighten to achieve clamp up, without preloading fastener
+        2. Apply final torque
+- When using electric screwdrivers:
+    - Maintain screwdriver torque settings:
+        - [Makita: 13-15](img/makita.png)
+        - [Milwaukee: 13-15](img/milwaukee.png)
+- Note: Apply dry torque values when using fastener with pre-applied Loctite.
+- See fastener torque tables for suggested torque values.  Tolerance is 5%.
 
-| Screw Size  | Typical Torque (Nm) | Typical Torque (in-lb) |
-| :---------: | :-----------------: | :--------------------: |
-|  M2 × 0.40  |    0.2 – 0.4 Nm     |    1.8 – 3.5 in-lb     |
-| M2.5 × 0.45 |    0.5 – 0.8 Nm     |    4.4 – 7.1 in-lb     |
-|  M3 × 0.50  |    0.4 – 0.6 Nm     |    3.5 – 5.3 in-lb     |
-|  M4 × 0.70  |    1.2 – 2.0 Nm     |   10.6 – 17.7 in-lb    |
-|  M5 × 0.80  |    2.4 – 3.2 Nm     |   21.2 – 28.3 in-lb    |
-|  M6 × 1.00  |    5.6 – 7.2 Nm     |   49.6 – 63.7 in-lb    |
+| Screw Size  | Dry Torque (Nm) | Dry Torque (in-lb) | Lubricated Torque (Nm) | Lubricated Torque (in-lb) |
+| :---------: | :-------------: | :----------------: | :--------------------: | :-----------------------: |
+|     M2      |      0.13       |        1.1         |         0.09           |           0.8             |
+|     M3      |      0.47       |        4.1         |         0.40           |           3.5             |
+|    M3.5     |      0.74       |        6.5         |         0.60           |           5.3             |
+|     M4      |      1.0        |        8.8         |         0.8            |           7.0             |
+|     M5      |      2.1        |       18.6         |         1.7            |          14.9             |
+|     M6      |      3.6        |       32.0         |         2.9            |          25.6             |
 
 ## Drawing / BOM References
 
