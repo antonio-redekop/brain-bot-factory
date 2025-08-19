@@ -8,6 +8,8 @@
 
 ## Workmanship Standards
 
+- Use ESD handling precautions
+- Handle components with care; some components are cosmetically sensitive.
 - Take care to avoid fastener preload.
 - Take care to avoid cross-threading fasteners.
 - Take special care when installing steel bolts into aluminum (e.g. B3CM)
@@ -54,11 +56,42 @@
 - Tower
     - [830-00310-01](bom/830-00310-01_tower.csv)
 
-## <font color="#e36c09">Sequence: Prep Base</font>
+## <font color="#e36c09">Sequence: Prep and Install Strip Brush</font>
 
-```
-Estimated time to complete:
-```
+### Parts
+
+| BOM Find No | Part Number  | Part Name                                                     | Quantity | Notes |
+| ----------- | ------------ | ------------------------------------------------------------- | -------- | ----- |
+| FN-6        | 411-00491-01 | Chassis, Jaeger                                               | 1        |       |
+| FN-41       | 442-00572-01 | Holder Strip Brush, Jaeger                                    | 1        |       |
+| FN-42       | 442-00573-01 | Strip Brush, Jaeger                                           | 1        |       |
+
+### Fasteners
+
+| BOM Find No | Part Number  | Description                                           | Quantity | Where Used?                                  |
+| ----------- | ------------ | ----------------------------------------------------- | -------- | -------------------------------------------- |
+| FN-70       | 442-00580-01 | 1/8" Aluminum Blind Rivets                            | 5        | mounting rivet brush assy                    |
+| FN-79       | 442-00598-01 | Zip Tie, Black, 0.10" Wide                            | 2        | securing FN-79                               |
+
+###  Tools
+
+| Tool Name                        | Note                            |
+| -------------------------------- | ------------------------------- |
+| Long needle nose pliers          | To install strip to strip brush |
+| Rivet gun                        | To install strip brush          |
+| Snips                            | To trim brush                   |
+
+### Instructions
+
+- <input type="checkbox" /> Trim the strip brush to length using fixture
+    - Note: Do not cut brush bristles from the edge
+- <input type="checkbox" /> [Install FN-42 strip brush to FN-41 strip brush holder.](img/base-strip-brush-install.png)
+- <input type="checkbox" /> Install the strip brush to the base using FN-70 rivets (5) places.
+- <input type="checkbox" /> Secure FN-41 brush strip against FN-6 chassis using FN-79 tie wrap (2) places.
+
+---
+
+## <font color="#e36c09">Sequence: Prep Base</font>
 
 ### Parts
 
@@ -68,29 +101,27 @@ Estimated time to complete:
 | FN-11       | 411-00496-01 | Bracket, Spring Retainer, Jaeger                              | 2        |       |
 | FN-31       | 420-00223-01 | Rail, Battery, Jaeger                                         | 2        |       |
 | FN-34       | 423-00278-01 | Spacer, Speaker, Jaeger                                       | 1        |       |
-| FN-35       | 830-00311-01 | Assy, Battery Lock, Jaeger                                    | 1        |       |
 | FN-37       | 442-00474-01 | Swivel Caster, Dual Wheel Polyamide Gray 50mm                 | 4        |       |
 | FN-38       | 442-00475-01 | Plate, Caster Mounting Base with Pin 42x42mm                  | 4        |       |
-| FN-41       | 442-00572-01 | Holder Strip Brush, Jaeger                                    | 1        |       |
-| FN-42       | 442-00573-01 | Strip Brush, Jaeger                                           | 1        |       |
 | FN-43       | 442-00574-01 | Bumper, RGB 250-562-4, Rubber, Black                          | 4        |       |
 | FN-44       | 442-00575-01 | Hole Grommet, SBR Rubber 1-1/8" Hole Dia x 3/32" Thk          | 2        |       |
 | FN-47       | 442-00578-01 | Hole Grommet, SBR Rubber 13/16" Hole Dia x 1/8" Thk, 1/2" ID  | 1        |       |
-| FN-68       | 450-00119-01 | Compression Spring, 1.75"L x 0.72"OD x 0.58"ID, 22 lbs/in, Zn | 2        |       |
+| FN-69       | 450-00119-01 | Compression Spring, 1.75"L x 0.72"OD x 0.58"ID, 22 lbs/in, Zn | 2        |       |
+| FN-71       | 442-00482-01 | Edge Grommet, Polyethylene Plastic 5/64"W                     | 3        |       |
+| FN-72       | 830-00317-01 | Battery Push Button                                           | 1        |       |
 | FN-108      | 810-00394-01 | Cable Assy, Speaker, Jaeger                                   | 1        |       |
 
 ### Fasteners
 
 | BOM Find No | Part Number  | Description                                           | Quantity | Where Used?                                  |
 | ----------- | ------------ | ----------------------------------------------------- | -------- | -------------------------------------------- |
-| FN-50       | 444-00163-01 | Nut, M4x0.7, Nylon Insert Locknut, Class 10, Zn       | 2        | mounting FN-35 battery lock                  |
-| FN-57       | 446-00326-10 | Screw, M4x10mm, Flat Head, Hex, Zn                    | 8        | mounting FN-31 battery rails                 |
+| FN-50       | 444-00163-01 | Nut, M4x0.7, Nylon Insert Locknut, Class 10, Zn       | 2        | mounting FN-72 battery push                  |
 | FN-56       | 446-00295-01 | Screw, M3x12mm, SHCS, Zinc-Plated Steel               | 4        | mounting FN-109 battery power and cable assy |
-| FN-58       | 446-00326-16 | Screw, M4x16mm, Flat Head, Hex, Zn                    | 2        | mounting FN-35 battery lock                  |
+| FN-58       | 446-00326-16 | Screw, M4x16mm, Flat Head, Hex, Zn                    | 2        | mounting FN-72 battery push button           |
 | FN-60       | 446-00370-10 | Screw, M5x10mm, Socket Head, Hex, Zn                  | 16       | mounting FN-38 caster plates                 |
 | FN-63       | 446-00378-01 | Screw, M4x10mm, Socket Head, Hex, Zinc Plated Steel   | 4        | mounting FN-11 spring retainer brackets      |
 | FN-64       | 446-00387-10 | Screw, M2x10mm, Pan Head, Phillips, Zinc Plated Steel | 4        | mounting FN-108 speaker cable assy           |
-| FN-70       | 442-00580-01 | 1/8" Aluminum Blind Rivets                            | 5        | mounting rivet brush assy |
+| FN-74       | 446-00418-12 | Screw, M4x12, Flat Head, Hex Drive                    | 8        | mounting FN-31 battery rails                 |
 
 ###  Tools
 
@@ -101,56 +132,47 @@ Estimated time to complete:
 | H4 hex bit                       | For FN-60                       |
 | 1/4 drive ratchet and 7mm socket | For FN-50                       |
 | PH00x40 screwdriver              | For FN-64                       |
-| Snips                            | For edge protection             |
-| Long needle nose pliers          | To install strip to strip brush |
-| Rivet gun                        | To install strip brush          |
+| Snips                            | For trimming edge grommets             |
 
 ### Instructions
 
-
 - <input type="checkbox" /> [Install FN-43 bumpers to FN-6 chassis (4) places.](img/base-bumpers.png)
-- <input type="checkbox" /> [Install FN-31 battery rails to FN-6 (2) places using (8) FN-57 screws](img/base-rails.png)
-- <input type="checkbox" /> [Install FN-37 swivel casters (4) places onto caster studs.](img/base-swivel.png)
-- <input type="checkbox" /> [Install FN-109 battery power and data cable assembly to FN-6 chassis using (4) FN-56 screws.](img/base-batpower.png)
-- <input type="checkbox" /> Trim the strip brush to length using fixture
-- <input type="checkbox" /> Install the strip brush to the base using FN-70 rivets (5) places.
-- <input type="checkbox" /> Install FN-38 caster mounting plate to FN-6 chassis (4) places using (16) FN-60 screws.
+- <input type="checkbox" /> [Install FN-71 edge grommets to FN-6 (2) places.](img/base-edge.png)
 - <input type="checkbox" /> [Install FN-44 grommets to FN-6 chassis (2) places.](img/base-grommets.png)
 - <input type="checkbox" /> [Install FN-47 grommet to FN-6 chassis](img/base-grommet2.png)
-- <input type="checkbox" /> [Install edge protection on FN-6 (2) places.](img/base-edge.png)
-- <input type="checkbox" /> [Install FN-42 strip brush to FN-41 strip brush holder.](img/base-strip-brush-install.png)
-- <input type="checkbox" /> [Install FN-35 battery lock using (2) FN-58 screws and (2) FN-50 nuts.](img/base-batterylock.png)
-- <input type="checkbox" /> [Install FN-68 compression springs into FN-11 spring retainer brackets (2) places.](img/base-springs.png)
+- <input type="checkbox" /> [Install FN-31 battery rails to FN-6 (2) places using (8) FN-74 screws](img/base-rails.png)
+- <input type="checkbox" /> [Install FN-37 swivel casters (4) places onto caster studs.](img/base-swivel.png)
+- <input type="checkbox" /> [Install FN-109 battery power and data cable assembly to FN-6 chassis using (4) FN-56 screws.](img/base-batpower.png)
+- <input type="checkbox" /> Install FN-38 caster mounting plate to FN-6 chassis (4) places using (16) FN-60 screws.
+- <input type="checkbox" /> Install FN-72 battery push button using (2) FN-58 screws and (2) FN-50 nuts.
 - <input type="checkbox" /> [Install FN-108 speaker cable assembly with FN-34 spacer using (4) FN-64 screws.](img/base-speaker.png)
+- <input type="checkbox" /> Install FN-11 spring retainer brackets (2) places using (4) FN-63 fasteners.
+- <input type="checkbox" /> [Install FN-69 compression springs into FN-11 spring retainer brackets (2) places.](img/base-springs.png)
 
 ---
 
 ## <font color="#e36c09">Sequence: Suspension and Motors </font>
 
-```
-Estimated time to complete:
-```
-
 ### Parts
 
 | BOM Find No | Part Number  | Part Name                                                                     | Quantity |
 | ----------- | ------------ | ----------------------------------------------------------------------------- | -------- | 
-| FN-1        | 275-00252-01 | 5inch, 24V, 3N.m, 270RPM, 4096‐wire encoder, single shaft, 70kg load/2 wheels | 2        |
-| FN-12       | 411-00497-01 | Bracket, Left Drive Wheel, Jaeger                                             | 1        |
-| FN-13       | 411-00498-01 | Bracket, Right Drive Wheel, Jaeger                                            | 1        |
+| FN-12       | 411-00548-01 | Left Drive Wheel Welded Bracket, Jaeger                                             | 1        |
+| FN-13       | 411-00549-01 | Right Drive Wheel Welded Bracket, Jaeger                                            | 1        |
 | FN-14       | 411-00499-01 | Bracket, Left Suspension Stop, Jaeger                                         | 1        |
 | FN-15       | 411-00500-01 | Bracket, Right Suspension Stop, Jaeger                                        | 1        |
 | FN-25       | 412-00194-01 | Mount, Wheel Pivot, Jaeger                                                    | 4        |
-| FN-26       | 414-00196-01 | Pin, Suspension, Jaeger                                                       | 2        |
+| FN-48 | 442-00581-01 | Flanged Sleeve Bearing, Bronze | 4 | 
+| FN-77 | 830-00318-01 | ZLTech Motor Altered Item, M1, Left | 1 |
+| FN-78 | 830-00318-02 | ZLTech Motor Altered Item, M2, Right | 1 | 
 
 ### Fasteners
 
 | BOM Find No | Part Number  | Description                                     | Quantity | Where Used?                 |
 | ----------- | ------------ | ----------------------------------------------- | -------- | --------------------------- |
-| FN-50       | 444-00163-01 | Nut, M4x0.7, Nylon Insert Locknut, Class 10, Zn | 4        | FN-14, FN-15 swing arm stop |
-| FN-61       | 446-00370-20 | Screw, M5x20mm, Socket Head, Hex, Zn            | 8        | Swing arm assembly to base  |
-| None        | None         | Supplied nut                                    | 2        | Wheel assy                  |
-| None        | None         | Supplied washer                                 | 2        | Wheel assy                  |
+| FN-61       | 446-00370-20 | Screw, M5x20mm, Socket Head, Hex, Zn            | 8        | Wheel bracket assemblies to base  |
+| None        | None         | Nut (supplied with wheel assy)                                    | 2        | Wheel assy                  |
+| None        | None         | Washer (supplied with wheel assy)                                 | 2        | Wheel assy                  |
 
 ### Tools
 
@@ -164,25 +186,19 @@ Estimated time to complete:
 
 ### Instructions
 
-
-- <input type="checkbox" /> [Get (4) FN-25 pivots and (4) FN-48 bushings. ](img/base-pivots-and-bushings.png)
+- <input type="checkbox" /> Get an FN-12 and an FN-13 drive wheel welded bracket. 
+- <input type="checkbox" /> [Get (4) FN-25 pivot mounts and (4) FN-48 bushings. ](img/base-pivots-and-bushings.png)
 - <input type="checkbox" /> Press the bushings into the pivots using the vice.
-- <input type="checkbox" /> [Install (1) FN-26 pin to FN-13 drive wheel bracket](img/base-swingarm-pin-install.png)
-- <input type="checkbox" /> Install (1) FN-26 pin to FN-12 drive wheel bracket.
-- <input type="checkbox" /> Press the assemblies together using the vice.
-- <input type="checkbox" /> [Install swing arm assembly using (4) FN-61 fasteners.  Repeat for the opposite swingarm assembly. ](img/base-pivot-install.png)
-- <input type="checkbox" /> [Install FN-1 wheels (2) places using supplied nut and washer](img/base-swingarm.png)
-    - Torque nuts to 25 Nm.
-- <input type="checkbox" /> [Install FN-14 suspension stop using (2) FN-50 nuts.  Repeat for FN-15 suspension stop](img/base-swingarm.png)
+- <input type="checkbox" /> Press the wheel bracket assemblies together using the vice.
+- <input type="checkbox" /> Install wheel brackets using (4) FN-61 fasteners.
+- <input type="checkbox" /> [Install FN-77 and FN-78 wheels (2) places using supplied nut and washer](img/base-swingarm.png)
+    - Apply FN-80 (Loctite Blue 243) on motor threads
+    - Torque nuts to 25 Nm (221 in-lbs).
 - <input type="checkbox" /> Pass the motor cables through the grommets in the base.
 
 ---
 
 ## <font color="#e36c09">Sequence: Install B3CM </font>
-
-```
-Estimated time to complete:
-```
 
 ### Parts
 
@@ -213,10 +229,6 @@ Estimated time to complete:
 ---
 
 ## <font color="#e36c09">Sequence: Assemble Upper Base</font>
-
-```
-Estimated time to complete:
-```
 
 ### Parts
 
@@ -276,10 +288,6 @@ Estimated time to complete:
 
 ## <font color="#e36c09">Sequence: E-Stop and Safety Interlock</font>
 
-```
-Estimated time to complete:
-```
-
 ### Parts
 
 | BOM Find No | Part Number  | Part Name                           | Quantity | Note |
@@ -325,10 +333,6 @@ Estimated time to complete:
 ---
 
 ## <font color="#e36c09">Sequence: Complete Distribution PCB-A</font>
-
-```
-Estimated time to complete:
-```
 
 ### Parts
 
@@ -386,10 +390,6 @@ Estimated time to complete:
 ---
 
 ## <font color="#e36c09">Sequence: Complete DD-TCM</font>
-
-```
-Estimated time to complete:
-```
 
 ### Parts
 
