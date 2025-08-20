@@ -138,6 +138,7 @@
 
 - <input type="checkbox" /> [Install FN-43 bumpers to FN-6 chassis (4) places.](img/base-bumpers.png)
 - <input type="checkbox" /> [Install FN-71 edge grommets to FN-6 (2) places.](img/base-edge.png)
+    - Note: Edge grommet cut length is 100MM (2 places)
 - <input type="checkbox" /> [Install FN-44 grommets to FN-6 chassis (2) places.](img/base-grommets.png)
 - <input type="checkbox" /> [Install FN-47 grommet to FN-6 chassis](img/base-grommet2.png)
 - <input type="checkbox" /> [Install FN-31 battery rails to FN-6 (2) places using (8) FN-74 screws](img/base-rails.png)
@@ -241,50 +242,49 @@
 | FN-19       | 411-00505-01 | Bracket, Right Handle, Jaeger                               | 1        |                |
 | FN-20       | 411-00506-01 | Bracket, Base Hook, Jaeger                                  | 1        |                |
 | FN-24       | 412-00193-01 | Base Plate, Tower, Jaeger                                   | 1        |                |
-| FN-33       | 442-00575-01 | Hooks                                                       | 2        | From Tower BOM |
+| FN-33       | 442-00575-01 | Hooks (supplied with FN-33 latches)                         | 2        | From Tower BOM |
 | FN-45       | 442-00576-01 | Cable Clamp, Screw Mount 0.203" Dia, Black Nylon, 0.875" ID | 1        |                |
 | FN-46       | 442-00577-01 | Cable Clamp, 0.172" Dia, Black Nylon, 0.625" ID             | 1        |                |
+| FN-71       | 442-00482-01 | Edge Grommet, Polyethylene Plastic 5/64"W                   | 2        |                |
+| FN-75       | 440-00260-01 | Tape Spacer, 0.6mm Thk, Jaeger Tower Base                   | 1        |                |
 
 ### Fasteners
 
 | BOM Find No | Part Number  | Description                                         | Quantity | Where Used? |
 | ----------- | ------------ | --------------------------------------------------- | -------- | ----------- |
 | FN-59       | 446-00370-10 | Screw, M5x10mm, Socket Head, Hex, Zn                | 4        |             |
-| FN-63       | 446-00378-10 | Screw, M4x10mm, Socket Head, Hex, Zinc Plated Steel | 10       |             |
+| FN-63       | 446-00378-10 | Screw, M4x10mm, Socket Head, Hex, Zinc Plated Steel | 14       |             |
 | FN-57       | 446-00326-10 | Screw, M4x10mm, Flat Head, Hex, Zn                  | 4        |             |
 | FN-65       | 446-00403-10 | Screw, M3.5X10, Button Head, Hex Drive, SS          | 4        |             |
-| FN-60       | 446-00370-10 | Screw, M5x10mm, Socket Head, Hex, Zn                | 16       |             |
+| FN-60       | 446-00370-10 | Screw, M5x10mm, Socket Head, Hex, Zn                | 17       |             |
 
 ### Tools
 
-| Tool Name                   | Note                        |
-| --------------------------- | --------------------------- |
-| Battery powered screwdriver |                             |
-| H4 hex bit                  | For FN-59, FN-60            |
-| H3 hex bit                  | For FN-63, FN-57            |
-| H2 hex bit                  | For FN-65                   |
-| Snips                       | For cutting edge protection |
-| Scissors                    | For cutting gaffer tape    |
-| Xacto knife                 | For trimming gaffer tape    |
+| Tool Name                   | Note                       |
+| --------------------------- | ---------------------------|
+| Battery powered screwdriver |                            |
+| H4 hex bit                  | For FN-59, FN-60           |
+| H3 hex bit                  | For FN-63, FN-57           |
+| H2 hex bit                  | For FN-65                  |
+| Snips                       | For cutting edge grommets  |
 
 ### Instructions
 
 - <input type="checkbox" /> [Install (2) FN-17 brackets to the base using (4) FN-60 fasteners](img/base-fn17.png)
-- <input type="checkbox" /> [Get FN-24 plate, (2) FN-8 brackets, (1) FN-7 bracket, and (10) FN-63 screws](img/base-plateassy.png)
-- <input type="checkbox" /> Install the FN-7 and FN-8 brackets to the plate.
-- <input type="checkbox" /> [Install FN-20 bracket to FN-24 plate using (2) FN-60 fasteners](img/base-basehook.png)
-- <input type="checkbox" /> Install (2) FN-33 hooks (from Tower BOM) to FN-20 bracket using (4) FN-65 screws.
+- <input type="checkbox" /> [Get FN-24 plate, (2) FN-8 front risers, (1) FN-7 back riser, and (12) FN-63 screws](img/base-plateassy.png)
+- <input type="checkbox" /> Install the FN-7 back riser and FN-8 front risers to the FN-24 plate.
+- <input type="checkbox" /> Install FN-20 bracket to FN-24 plate using (3) FN-60 fasteners
+- <input type="checkbox" /> Install (2) hooks (from FN-33 latches from Tower BOM) to FN-20 bracket using (4) FN-65 screws.
+    - Note:  Pull hooks up as far as possible during installation so they are even and allow for easier engagement tower latches.
 - <input type="checkbox" /> [Install FN-45 clamp to FN-24 plate using (1) FN-63 fastener](img/base-clamp.png)
 - <input type="checkbox" /> [Install FN-46 clamp to FN-24 plate using (1) FN-63 fastener](img/base-clamp.png)
 - <input type="checkbox" /> [Install the (2) FN-8 front risers to the base using (8) FN-63 fasteners](img/base-risers.png)
-- <input type="checkbox" /> [Install FN-7 back riser the base using (4) FN-57 fasteners.](img/base-backriser.png)
+- <input type="checkbox" /> Install FN-7 back riser the base using (4) FN-57 fasteners and to the FN-9 B3CM bracket using (2) FN-63 fasteners.
 - <input type="checkbox" /> [Install FN-18 and FN-19 brackets using (8) FN-60 fasteners.](img/base-handlebracket.png)
-- <input type="checkbox" /> [Install edge protection (2) places on FN-18 and FN-19.](img/base-protec.png)
+- <input type="checkbox" /> Install FN-71 edge grommets to FN-18 and FN-19.
+    - Note: Edge grommet cut length is 90MM (2 places)
 - <input type="checkbox" /> Route hub motor cables through the base cut-out.
-- <input type="checkbox" /> [Apply a 5.5" width of gaffer tape as shown.](img/base-gaffer-tape.png)
-    - Acceptance criteria:  No overlaps allowed.
-
----
+- <input type="checkbox" /> Apply FN-75 spacer to the base as shown.
 
 ## <font color="#e36c09">Sequence: E-Stop and Safety Interlock</font>
 
