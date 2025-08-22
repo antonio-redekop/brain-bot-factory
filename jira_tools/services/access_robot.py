@@ -3,6 +3,7 @@ from typing import Dict, Tuple, List, Any
 
 from jira_tools.services.attachments import get_first_json_attachment
 from jira_tools.services.comments import get_comments
+from jira_tools.jira_api_client import JiraClient
 
 # matches semantic version numbers e.g. 0.1.0
 _SEMVER_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
@@ -27,7 +28,7 @@ _EVENT_ALL_FIELDS = [
     "operatorComment",   # << always last
 ]
 
-def lookup_robot(payload: Dict[str, str], *, mrr_issue_key: str) -> str:
+def lookup_robot(payload: Dict[str, str], client: JiraClient,*, mrr_issue_key: str) -> str:
     """
     Given a QR payload like {"rin": "BC033W000008NH"}, return the robotProdId (e.g., "JAG-0007")
     by reading the first JSON attachment from the Master Robot Record (Jira issue).
@@ -38,7 +39,7 @@ def lookup_robot(payload: Dict[str, str], *, mrr_issue_key: str) -> str:
         raise ValueError("QR payload must include 'rin'.")
 
     # Load the attachment JSON from the Master Robot Record issue
-    mrr_json = get_first_json_attachment(mrr_issue_key)
+    mrr_json = get_first_json_attachment(mrr_issue_key, client)
     if not isinstance(mrr_json, dict) or not mrr_json:
         raise ValueError("Master Robot Record attachment must be a non-empty JSON object (RIN -> robotPid).")
     try:
@@ -70,7 +71,7 @@ def _get_robot_seq(robot_pid: str) -> int:
         raise ValueError(f"robotPid '{robot_pid}' must end with 4 digits (e.g., JAG-0007).")
     return int(m.group(1))
 
-def fetch_routing(robot_pid: str, *, mroute_issue_key: str) -> Dict[str, Any]:
+def fetch_routing(robot_pid: str, client: JiraClient, *, mroute_issue_key: str) -> Dict[str, Any]:
     """
     Given a robot_pid, we return the correct production routing from the Master Routing Record issue
     Highest semantic version wins among effectivity matches
@@ -80,7 +81,7 @@ def fetch_routing(robot_pid: str, *, mroute_issue_key: str) -> Dict[str, Any]:
     Returns:
         A dict of the applicable routing with highest semantic version
     """
-    doc = get_first_json_attachment(mroute_issue_key)
+    doc = get_first_json_attachment(mroute_issue_key, client)
     mrr = (doc or {}).get("masterRoutingRecord")
     if not isinstance(mrr, list) or not mrr:
         raise ValueError("Master Routing Record attachment must contain non-empty 'masterRoutingRecord' array.")
