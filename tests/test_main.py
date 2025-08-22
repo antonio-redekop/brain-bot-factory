@@ -1,7 +1,8 @@
 import pytest, requests
 from jira_tools.jira_api_client import JiraClient
 from jira_tools.utils.adf import parse_adf_description
-from jira_tools.services.access_robot import lookup_robot, build_robot_history
+from jira_tools.services.access_robot import build_robot_history
+from jira_tools.services.robot_lookup import lookup_robot_pid 
 
 JIRA_TEST_ISSUE = "POPS-2575"
 JIRA_TEST_ISSUE_BAD = "POPS-9999"
@@ -36,11 +37,7 @@ def test_get_first_json_attachment(client):
     assert(client.get_nth_attachment(0, JIRA_MASTER_ROBOT_RECORD)[TEST_RIN] == TEST_ROBOT_PID)
 
 def test_lookup_robot(client):
-    assert(lookup_robot(
-        QR_TEST_PAYLOAD,
-        client,
-        mrr_issue_key = JIRA_MASTER_ROBOT_RECORD
-    ) == TEST_ROBOT_PID)
+    assert(lookup_robot_pid(QR_TEST_PAYLOAD, client) == TEST_ROBOT_PID)
 
 def test_build_robot_history(client):
     assert(build_robot_history(JIRA_TEST_ISSUE, client)[0].get("eventType") == "OPERATION_COMPLETE")
