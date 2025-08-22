@@ -1,4 +1,5 @@
 import pytest, requests
+from jira_tools.config.config import Config
 from jira_tools.jira_api_client import JiraClient
 from jira_tools.utils.adf import parse_adf_description
 from jira_tools.services.events import get_event_history_for 
@@ -6,16 +7,16 @@ from jira_tools.services.robot_lookup import lookup_robot_pid
 
 JIRA_TEST_ISSUE = "POPS-2575"
 JIRA_TEST_ISSUE_BAD = "POPS-9999"
-JIRA_MASTER_ROBOT_RECORD = "POPS-2632"
-JIRA_MASTER_ROUTING_RECORD = "POPS-2633"
-
 TEST_RIN = "BC033W000667DJ"    # maps to JAG-0666 in MRR
 TEST_ROBOT_PID = "JAG-0666"
 QR_TEST_PAYLOAD = { "rin": TEST_RIN }
 
 @pytest.fixture
 def client():
-    return JiraClient()
+    test_config = Config() 
+    test_config.master_robot_issue_key = "POPS-2632"
+    test_config.master_routing_issue_key = "POPS-2633"
+    return JiraClient(config=test_config)
 
 def test_get_robot_record(client):
     try:
@@ -34,7 +35,7 @@ def test_get_robot_record(client):
     assert fields["created"] == "2025-07-22T16:44:08.222-0700"
 
 def test_get_first_json_attachment(client):
-    assert(client.get_nth_attachment(0, JIRA_MASTER_ROBOT_RECORD)[TEST_RIN] == TEST_ROBOT_PID)
+    assert(client.get_nth_attachment(0, client.config.master_robot_issue_key)[TEST_RIN] == TEST_ROBOT_PID)
 
 def test_lookup_robot(client):
     assert(lookup_robot_pid(QR_TEST_PAYLOAD, client) == TEST_ROBOT_PID)
