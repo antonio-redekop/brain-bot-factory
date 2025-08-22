@@ -1,4 +1,4 @@
-from jira_tools.http import get_json
+from jira_tools.services.http import get_json
 from jira_tools.jira_api_client import JiraClient
 # from jira_tools.services.issues import get_robot_record
 

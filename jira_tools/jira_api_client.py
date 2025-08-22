@@ -1,5 +1,5 @@
 from typing import Any, Dict, Protocol
-from jira_tools.http import get_json
+from jira_tools.services.http import get_json
 
 class JiraClientProtocol(Protocol):
     def get_issue_data(self, issue_key: str): ...
