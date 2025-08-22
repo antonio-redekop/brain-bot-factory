@@ -1,5 +1,5 @@
 import re
-from typing import Tuple
+from typing import Any, Dict, List, Tuple
 
 # matches semantic version numbers e.g. 0.1.0
 _SEMVER_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")

@@ -1,10 +1,7 @@
 import re
-from typing import Dict, Tuple, List, Any
+from typing import Dict, List, Any
 from jira_tools.jira_api_client import JiraClient
-from jira_tools.utils.parse import parse_robot_pid, parse_semver
 
-# matches a start-end effectivity range e.g. 0001-0086
-_EFFECTIVITY_RE = re.compile(r"^(?P<start>\d{4})-(?P<end>\d{4})$")
 # Matches Markdown-style heading for an event
 _EVENT_HEADER_RE = re.compile(r"^\s*#{1,6}\s*(?P<etype>[A-Z_]+)\s*$", re.MULTILINE)
 # Match bullet line: "- key: value" (also allows unicode bullets/dashes)
@@ -42,46 +39,6 @@ def lookup_robot(payload: Dict[str, str], client: JiraClient,*, mrr_issue_key: s
         return str(mrr_json[rin])
     except KeyError as e:
         raise ValueError(f"RIN '{rin}' not found in Master Robot Record.") from e
-
-def fetch_routing(robot_pid: str, client: JiraClient, *, mroute_issue_key: str) -> Dict[str, Any]:
-    """
-    Given a robot_pid, we return the correct production routing from the Master Routing Record issue
-    Highest semantic version wins among effectivity matches
-    Arguments:
-        robot_pid: str                 e.g. JAG-0007
-        mroute_issue_key: str          e.g. POPS-0666
-    Returns:
-        A dict of the applicable routing with highest semantic version
-    """
-    doc = client.get_nth_attachment(0, mroute_issue_key)
-    mrr = (doc or {}).get("masterRoutingRecord")
-    if not isinstance(mrr, list) or not mrr:
-        raise ValueError("Master Routing Record attachment must contain non-empty 'masterRoutingRecord' array.")
-
-    # Get the numeric portion from `robot_pid`
-    seq = parse_robot_pid(robot_pid)
-
-    # Create list to hold our routing candidates; we can sort list later
-    routing_list: List[Tuple[Tuple[int, int, int], Dict[str, Any]]] = []
-
-    # Iterate through routing versions contained in MRR and append to `routing_list`
-    # a - starting effectivity
-    # b - ending effectivity
-    for record in mrr:
-        eff = record.get("effectivity", "")
-        m = _EFFECTIVITY_RE.match(eff)
-        if not m:
-            continue
-        a, b = int(m.group("start")), int(m.group("end"))
-        if a <= seq <= b:
-            ver = str(record.get("version", "0.0.0"))
-            routing_list.append((parse_semver(ver), record))
-
-    if not routing_list:
-        raise LookupError(f"No routing found that covers robot '{robot_pid}'.")
-
-    routing_list.sort(key=lambda t: t[0], reverse=True)
-    return routing_list[0][1]
 
 def build_robot_history(robot_issue_key: str, client: JiraClient) -> List[Dict[str, Any]]:
     """

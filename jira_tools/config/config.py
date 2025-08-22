@@ -13,6 +13,8 @@ class Config:
     jira_email: str = os.environ["JIRA_EMAIL"]
     jira_api_token: str = os.environ["JIRA_API_TOKEN"]
     jira_domain = os.environ["JIRA_DOMAIN"]
+    master_robot_issue_key = os.environ["JIRA_MASTER_ROBOT_ISSUE_KEY"]
+    master_routing_issue_key = os.environ["JIRA_MASTER_ROUTING_ISSUE_KEY"]
 
     @property
     def base_url(self) -> str:
