@@ -1,9 +1,8 @@
 import re
 from typing import Dict, Tuple, List, Any
 from jira_tools.jira_api_client import JiraClient
+from jira_tools.utils.parse import parse_robot_pid, parse_semver
 
-# matches semantic version numbers e.g. 0.1.0
-_SEMVER_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
 # matches a start-end effectivity range e.g. 0001-0086
 _EFFECTIVITY_RE = re.compile(r"^(?P<start>\d{4})-(?P<end>\d{4})$")
 # Matches Markdown-style heading for an event
@@ -44,30 +43,6 @@ def lookup_robot(payload: Dict[str, str], client: JiraClient,*, mrr_issue_key: s
     except KeyError as e:
         raise ValueError(f"RIN '{rin}' not found in Master Robot Record.") from e
 
-def _get_semver(v: str) -> Tuple[int, int, int]:
-    """
-    Input is a semantic version string e.g. "0.1.0"
-    Validates string against a regex 
-    Returns a tuple containing MAJOR, MINOR, PATCH 
-    """
-    # match looks for matches starting at position 0 of the string
-    # Will return None, if entire string does not match
-    m = _SEMVER_RE.match(v or "")
-    if not m:
-        return (0, 0, 0)
-    return (int(m.group(1)), int(m.group(2)), int(m.group(3)))
-
-def _get_robot_seq(robot_pid: str) -> int:
-    """
-    Given a robot_pid, e.g. JAG-0007, returns the numeric portion e.g. 0007
-    """
-    # re.search looks anywhere in the string for a match
-    # But in this case, we anchor to the end of the string
-    m = re.search(r"(\d{4})$", robot_pid)
-    if not m:
-        raise ValueError(f"robotPid '{robot_pid}' must end with 4 digits (e.g., JAG-0007).")
-    return int(m.group(1))
-
 def fetch_routing(robot_pid: str, client: JiraClient, *, mroute_issue_key: str) -> Dict[str, Any]:
     """
     Given a robot_pid, we return the correct production routing from the Master Routing Record issue
@@ -84,7 +59,7 @@ def fetch_routing(robot_pid: str, client: JiraClient, *, mroute_issue_key: str) 
         raise ValueError("Master Routing Record attachment must contain non-empty 'masterRoutingRecord' array.")
 
     # Get the numeric portion from `robot_pid`
-    seq = _get_robot_seq(robot_pid)
+    seq = parse_robot_pid(robot_pid)
 
     # Create list to hold our routing candidates; we can sort list later
     routing_list: List[Tuple[Tuple[int, int, int], Dict[str, Any]]] = []
@@ -100,7 +75,7 @@ def fetch_routing(robot_pid: str, client: JiraClient, *, mroute_issue_key: str) 
         a, b = int(m.group("start")), int(m.group("end"))
         if a <= seq <= b:
             ver = str(record.get("version", "0.0.0"))
-            routing_list.append((_get_semver(ver), record))
+            routing_list.append((parse_semver(ver), record))
 
     if not routing_list:
         raise LookupError(f"No routing found that covers robot '{robot_pid}'.")
