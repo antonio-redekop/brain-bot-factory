@@ -1,8 +1,6 @@
 import re
 from typing import Dict, Tuple, List, Any
 from jira_tools.jira_api_client import JiraClient
-from jira_tools.services.comments import get_comments
-from jira_tools.jira_api_client import JiraClient
 
 # matches semantic version numbers e.g. 0.1.0
 _SEMVER_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
@@ -110,11 +108,11 @@ def fetch_routing(robot_pid: str, client: JiraClient, *, mroute_issue_key: str) 
     routing_list.sort(key=lambda t: t[0], reverse=True)
     return routing_list[0][1]
 
-def build_robot_history(robot_issue_key: str) -> List[Dict[str, Any]]:
+def build_robot_history(robot_issue_key: str, client: JiraClient) -> List[Dict[str, Any]]:
     """
     Construct robot history from the comment fields of a robot issue (robot record) 
     """
-    comments = get_comments(robot_issue_key)  # your objects use: text, author_name, author_email, created
+    comments = client.get_comments(robot_issue_key)  # your objects use: text, author_name, author_email, created
     events: List[Dict[str, Any]] = []
 
     for c in comments:

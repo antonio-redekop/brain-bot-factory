@@ -1,7 +1,6 @@
 import pytest, requests
 from jira_tools.jira_api_client import JiraClient
 from jira_tools.services.adf import parse_adf_description
-# from jira_tools.services.comments import delete_last_comment, get_comments, add_comment, delete_last_comment
 from jira_tools.services.access_robot import lookup_robot, build_robot_history
 
 JIRA_TEST_ISSUE = "POPS-2575"
@@ -43,19 +42,19 @@ def test_lookup_robot(client):
         mrr_issue_key = JIRA_MASTER_ROBOT_RECORD
     ) == TEST_ROBOT_PID)
 
-def test_build_robot_history():
-    assert(build_robot_history(JIRA_TEST_ISSUE)[0].get("eventType") == "OPERATION_COMPLETE")
+def test_build_robot_history(client):
+    assert(build_robot_history(JIRA_TEST_ISSUE, client)[0].get("eventType") == "OPERATION_COMPLETE")
 
-# def test_comments():
-#     # Test `add_comment`
-#     comment_text1 = "testComment1"
-#     comment_text2 = "testComment2"
-#     add_comment(JIRA_TEST_ISSUE, comment_text1) 
-#     add_comment(JIRA_TEST_ISSUE, comment_text2) 
-#     comments = get_comments(JIRA_TEST_ISSUE)
-#     assert comments[0].get("text") == "testComment1"
-#     assert comments[1].get("text") == "testComment2"
-#
-#     # Test `delete_last_comment`
-#     delete_last_comment(JIRA_TEST_ISSUE)
-#     delete_last_comment(JIRA_TEST_ISSUE)
+def test_comments(client):
+    # Test `add_comment`
+    comment_text1 = "testComment1"
+    comment_text2 = "testComment2"
+    client.add_comment(JIRA_TEST_ISSUE, comment_text1) 
+    client.add_comment(JIRA_TEST_ISSUE, comment_text2) 
+    comments = client.get_comments(JIRA_TEST_ISSUE)
+    assert comments[1].get("text") == "testComment1"
+    assert comments[2].get("text") == "testComment2"
+
+    # Test `delete_last_comment`
+    client.delete_last_comment(JIRA_TEST_ISSUE)
+    client.delete_last_comment(JIRA_TEST_ISSUE)
