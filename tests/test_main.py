@@ -1,8 +1,7 @@
 import pytest, requests
 from jira_tools.jira_api_client import JiraClient
 from jira_tools.services.adf import parse_adf_description
-from jira_tools.services.comments import delete_last_comment, get_comments, add_comment, delete_last_comment
-from jira_tools.services.attachments import get_first_json_attachment
+# from jira_tools.services.comments import delete_last_comment, get_comments, add_comment, delete_last_comment
 from jira_tools.services.access_robot import lookup_robot, build_robot_history
 
 JIRA_TEST_ISSUE = "POPS-2575"
@@ -35,7 +34,7 @@ def test_get_robot_record(client):
     assert fields["created"] == "2025-07-22T16:44:08.222-0700"
 
 def test_get_first_json_attachment(client):
-    assert(get_first_json_attachment(JIRA_MASTER_ROBOT_RECORD, client)[TEST_RIN] == TEST_ROBOT_PID)
+    assert(client.get_nth_attachment(0, JIRA_MASTER_ROBOT_RECORD)[TEST_RIN] == TEST_ROBOT_PID)
 
 def test_lookup_robot(client):
     assert(lookup_robot(

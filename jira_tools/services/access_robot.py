@@ -1,7 +1,6 @@
 import re
 from typing import Dict, Tuple, List, Any
-
-from jira_tools.services.attachments import get_first_json_attachment
+from jira_tools.jira_api_client import JiraClient
 from jira_tools.services.comments import get_comments
 from jira_tools.jira_api_client import JiraClient
 
@@ -39,7 +38,7 @@ def lookup_robot(payload: Dict[str, str], client: JiraClient,*, mrr_issue_key: s
         raise ValueError("QR payload must include 'rin'.")
 
     # Load the attachment JSON from the Master Robot Record issue
-    mrr_json = get_first_json_attachment(mrr_issue_key, client)
+    mrr_json = client.get_nth_attachment(0, mrr_issue_key)
     if not isinstance(mrr_json, dict) or not mrr_json:
         raise ValueError("Master Robot Record attachment must be a non-empty JSON object (RIN -> robotPid).")
     try:
@@ -81,7 +80,7 @@ def fetch_routing(robot_pid: str, client: JiraClient, *, mroute_issue_key: str) 
     Returns:
         A dict of the applicable routing with highest semantic version
     """
-    doc = get_first_json_attachment(mroute_issue_key, client)
+    doc = client.get_nth_attachment(0, mroute_issue_key)
     mrr = (doc or {}).get("masterRoutingRecord")
     if not isinstance(mrr, list) or not mrr:
         raise ValueError("Master Routing Record attachment must contain non-empty 'masterRoutingRecord' array.")
