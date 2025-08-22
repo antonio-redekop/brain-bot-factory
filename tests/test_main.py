@@ -1,6 +1,6 @@
 import pytest, requests
 from jira_tools.jira_api_client import JiraClient
-from jira_tools.adf import parse_adf_description
+from jira_tools.services.adf import parse_adf_description
 from jira_tools.services.comments import delete_last_comment, get_comments, add_comment, delete_last_comment
 from jira_tools.services.attachments import get_first_json_attachment
 from jira_tools.services.access_robot import lookup_robot, build_robot_history

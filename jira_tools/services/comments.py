@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import Any, Dict, List
 
 from jira_tools.services.http import get_json, post_json, delete as http_delete
-from jira_tools.adf import build_adf_comment_body, parse_adf_comment
+from jira_tools.services.adf import build_adf_comment_body, parse_adf_comment
 
 def get_comments(issue_key: str) -> List[Dict[str, Any]]:
     """
