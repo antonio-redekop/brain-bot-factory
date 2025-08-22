@@ -1,6 +1,9 @@
+from __future__ import annotations
 import requests
-from typing import Any, Mapping, Optional
-from jira_tools import config
+from typing import TYPE_CHECKING, Any, Mapping, Optional
+
+if TYPE_CHECKING:  # Only evaluated by type checkers, not at runtime
+    from jira_tools.jira_api_client import JiraClient
 
 class JiraHttpError(requests.exceptions.HTTPError):
     """Raised when Jira API returns an error response."""
@@ -13,14 +16,15 @@ def jira_request(
     *,    # <---- positional only separator
     headers: Optional[Mapping[str, str]] = None,
     timeout: float = 30.0,
+    client: JiraClient,
 ) -> requests.Response:
     """
     Perform an HTTP request to the Jira API.
     Raises:
         JiraHttpError: If Jira responds with a 4xx/5xx status code.
     """
-    merged_headers = {**config.DEFAULT_HEADERS, **(headers or {})}
-    url = f"{config.JIRA_BASE_URL}{endpoint}" 
+    merged_headers = {**client.config.default_headers, **(headers or {})}
+    url = f"{client.config.base_url}{endpoint}" 
 
     # requests.request always returns response object; does not raise exceptions
     resp = requests.request(
@@ -28,7 +32,7 @@ def jira_request(
         url,
         headers=merged_headers,
         json=json_payload,
-        auth=config.AUTH,
+        auth=client.config.auth,
         timeout=timeout)
     try:
         # `raise_for_status` preserves response object, unlike manually raising
@@ -43,14 +47,14 @@ def jira_request(
         ) from e
     return resp
 
-def get_json(endpoint: str, **kwargs):
+def get_json(endpoint: str, client: JiraClient, **kwargs):
     """Perform a GET request and return parsed JSON."""
-    return jira_request("GET", endpoint, **kwargs).json()
+    return jira_request("GET", endpoint, client=client, **kwargs).json()
 
-def post_json(endpoint: str, payload, **kwargs):
+def post_json(endpoint: str, payload, client: JiraClient, **kwargs):
     """Perform a POST request and return parsed JSON."""
-    return jira_request("POST", endpoint, json_payload=payload, **kwargs).json()
+    return jira_request("POST", endpoint, json_payload=payload, client=client, **kwargs).json()
 
-def delete(endpoint: str, **kwargs):
+def delete(endpoint: str, client:JiraClient, **kwargs):
     """Perform a DELETE request."""
-    jira_request("DELETE", endpoint, **kwargs)
+    jira_request("DELETE", endpoint, client=client, **kwargs)

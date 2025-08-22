@@ -1,15 +1,21 @@
 from typing import Any, List, Dict, Protocol
 from jira_tools.services.http import get_json, post_json, delete as http_delete
 from jira_tools.utils.adf import build_adf_comment_body, parse_adf_comment
+from jira_tools.config.config import Config
 
 class JiraClientProtocol(Protocol):
     def get_issue_data(self, issue_key: str) -> Dict[str, Any]: ...
     def get_attachments(self, issue_key: str) -> List[Dict[str,Any]]: ...
     def get_nth_attachment(self, n: int, issue_key: str) -> Dict[str,Any]: ...
-    # def get_comments(self, issue_key: str): ...
-    # def delete_comment(self): ...
+    def get_comments(self, issue_key: str) -> List[Dict[str, Any]]: ...
+    def add_comment(self, issue_key: str, comment_text: str) -> Dict[str, Any]: ...
+    def delete_last_comment(self, issue_key: str) -> None: ...
+    def delete_comment(self) -> None: ...
 
 class JiraClient(JiraClientProtocol):
+    def __init__(self, config: Config | None = None):
+        self.config = config or Config()
+
     def get_issue_data(self, issue_key: str) -> Dict[str, Any]:
         """
         Fetches data attached to a Jira issue (i.e. a Robot Record)
@@ -19,7 +25,7 @@ class JiraClient(JiraClientProtocol):
             dict: The Jira issue data parsed as a JSON object.
         """
         issue_url = f"{issue_key}"
-        return get_json(issue_url)
+        return get_json(issue_url, self)
 
     def get_attachments(self, issue_key: str) -> List[Dict[str, Any]]:
         data = self.get_issue_data(issue_key)
@@ -33,7 +39,7 @@ class JiraClient(JiraClientProtocol):
         attachment_id = attachments[n]["id"]
         # Hop up one level from issue/ to attachment/ content endpoint
         attachment_url = f"../attachment/content/{attachment_id}" 
-        return get_json(attachment_url, headers={}, timeout=30)
+        return get_json(attachment_url, self, headers={}, timeout=30)
 
     def get_comments(self, issue_key: str) -> List[Dict[str, Any]]:
         """
@@ -45,7 +51,7 @@ class JiraClient(JiraClientProtocol):
         """
         # Fetch all comments
         comments_url = f"{issue_key}/comment"
-        response = get_json(comments_url)
+        response = get_json(comments_url, self)
 
         # Gets comments, if key is available, else returns empty list
         comments = response.get("comments", [])
@@ -69,7 +75,7 @@ class JiraClient(JiraClientProtocol):
         # payload must be ADF formated JSON
         payload = build_adf_comment_body(comment_text)
 
-        return post_json(comment_url, payload)
+        return post_json(comment_url, payload, self)
 
     def delete_last_comment(self, issue_key: str) -> None:
         """
@@ -96,5 +102,5 @@ class JiraClient(JiraClientProtocol):
 
         # Delete most recent comment
         delete_url = f"{comments_url}/{comment_id}"
-        http_delete(delete_url)
+        http_delete(delete_url, self)
         print(f"Deleted comment ID {comment_id} from issue {issue_key}.")
