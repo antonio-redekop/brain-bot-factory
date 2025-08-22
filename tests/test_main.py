@@ -1,6 +1,6 @@
 import pytest, requests
 from jira_tools.jira_api_client import JiraClient
-from jira_tools.services.adf import parse_adf_description
+from jira_tools.utils.adf import parse_adf_description
 from jira_tools.services.access_robot import lookup_robot, build_robot_history
 
 JIRA_TEST_ISSUE = "POPS-2575"
