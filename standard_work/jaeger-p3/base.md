@@ -235,6 +235,7 @@
 
 | BOM Find No | Part Number  | Part Name                                                   | Quantity | Note           |
 | ----------- | ------------ | ----------------------------------------------------------- | -------- | -------------- |
+| FN-2        | 500-00179-01 | Antenna, 5-in-1, Molex, 120cm                               | 1        |                | 
 | FN-7        | 411-00492-01 | Bracket, Chassis Back Riser, Jaeger                         | 1        |                |
 | FN-8        | 411-00493-01 | Bracket, Chassis Front Riser, Jaeger                        | 2        |                |
 | FN-17       | 411-00503-01 | Bracket, Handle Support, Jaeger                             | 2        |                |
@@ -242,6 +243,7 @@
 | FN-19       | 411-00505-01 | Bracket, Right Handle, Jaeger                               | 1        |                |
 | FN-20       | 411-00506-01 | Bracket, Base Hook, Jaeger                                  | 1        |                |
 | FN-24       | 412-00193-01 | Base Plate, Tower, Jaeger                                   | 1        |                |
+| FN-28       | 420-00219-01 | 5-in-1 Antenna Mount, Jaeger                                | 1        |                |
 | FN-33       | 442-00575-01 | Hooks (supplied with FN-33 latches)                         | 2        | From Tower BOM |
 | FN-45       | 442-00576-01 | Cable Clamp, Screw Mount 0.203" Dia, Black Nylon, 0.875" ID | 1        |                |
 | FN-46       | 442-00577-01 | Cable Clamp, 0.172" Dia, Black Nylon, 0.625" ID             | 1        |                |
@@ -253,10 +255,11 @@
 | BOM Find No | Part Number  | Description                                         | Quantity | Where Used? |
 | ----------- | ------------ | --------------------------------------------------- | -------- | ----------- |
 | FN-59       | 446-00370-10 | Screw, M5x10mm, Socket Head, Hex, Zn                | 4        |             |
-| FN-63       | 446-00378-10 | Screw, M4x10mm, Socket Head, Hex, Zinc Plated Steel | 14       |             |
+| FN-63       | 446-00378-10 | Screw, M4x10mm, Socket Head, Hex, Zinc Plated Steel | 16       |             |
 | FN-57       | 446-00326-10 | Screw, M4x10mm, Flat Head, Hex, Zn                  | 4        |             |
 | FN-65       | 446-00403-10 | Screw, M3.5X10, Button Head, Hex Drive, SS          | 4        |             |
 | FN-60       | 446-00370-10 | Screw, M5x10mm, Socket Head, Hex, Zn                | 17       |             |
+| FN-68       | 456-00180-01 | Washer, M4, 12 OD x 1.4 Thk, Zn Plated Steel        | 2        |             |
 
 ### Tools
 
@@ -280,13 +283,14 @@
 - <input type="checkbox" /> [Install FN-46 clamp to FN-24 plate using (1) FN-63 fastener](img/base-clamp.png)
 - <input type="checkbox" /> [Install the (2) FN-8 front risers to the base using (8) FN-63 fasteners](img/base-risers.png)
 - <input type="checkbox" /> Install FN-7 back riser the base using (4) FN-57 fasteners and to the FN-9 B3CM bracket using (2) FN-63 fasteners.
+- <input type="checkbox" /> Install FN-28 Antenna Mount using (2) FN-63 fasteners and (2) FN-68 washers 
 - <input type="checkbox" /> [Install FN-18 and FN-19 brackets using (8) FN-60 fasteners.](img/base-handlebracket.png)
 - <input type="checkbox" /> Install FN-71 edge grommets to FN-18 and FN-19.
     - Note: Edge grommet cut length is 90MM (2 places)
 - <input type="checkbox" /> Route hub motor cables through the base cut-out.
 - <input type="checkbox" /> Apply FN-75 spacer to the base as shown.
 
-## <font color="#e36c09">Sequence: E-Stop and Safety Interlock</font>
+## <font color="#e36c09">Sequence: E-Stop Switch</font>
 
 ### Parts
 
@@ -295,40 +299,29 @@
 | FN-7        | 411-00492-01 | Bracket, Chassis Back Riser, Jaeger | 1        |      |
 | FN-16       | 411-00502-01 | Bracket, Estop, Jaeger              | 1        |      |
 | FN-36       | 235-00131-01 | SWITCH, PUSHBUTTON, E-STOP, 22mm    | 1        |      |
-| FN-71       | 235-00136-01 | Safety interlock switch             | 1        |      |
-| FN-112      | 810-00419-01 | Cable Assy, ESTOP & Kill Switch     | 1        |      |
+| FN-107      | 810-00392-01 | Cable Assy, Wake Button, Jaeger     | 1        |      |  
 
 ### Fasteners
 
 | BOM Find No | Part Number  | Description                                         | Quantity | Where Used?            |
 | ----------- | ------------ | --------------------------------------------------- | -------- | ---------------------- |
 | FN-63       | 446-00378-10 | Screw, M4x10mm, Socket Head, Hex, Zinc Plated Steel | 4        | FN-16 bracket          |
-| FN-62       | 446-00375-35 | Screw, M4x35mm, Button Head, Hex, Zinc Plated Steel | 2        | FN-71 safety interlock |
 
 ### Tools
 
 | Tool Name                   | Note                               |
 | --------------------------- | ---------------------------------- |
-| Screwdriver with H3 hex bit | For FN-62, FN-63 fasteners         |
-| Phillips screwdriver        | For safety interlock switch screws |
+| Screwdriver with H3 hex bit | For FN-63 fasteners                |
 
 ### Instructions
 
-- <input type="checkbox" /> [Get the FN-36 E-stop switch, FN-16 E-stop bracket, and the Wake Button Cable Assy.](img/base-estop-assy.png)
-- <input type="checkbox" /> Install the Wake Button Cable Assy
+- <input type="checkbox" /> Get the FN-36 E-stop switch, FN-16 E-stop bracket, and the FN-107 Wake Button Cable Assy.
+- <input type="checkbox" /> Install the FN-107 cable assy.
     - Reference routing for Wake Button Cable Assy:
         - [View `1`](img/base-wake-button-view-1.png)
         - [View `2`](img/base-wake-button-view-2.png)
-- <input type="checkbox" /> Get an FN-112 E-stop and Kill Switch cable assembly.  Install the lugs to the E-Stop Switch (2) places.
-- <input type="checkbox" /> [Install the E-Stop switch to the FN-16 bracket](img/base-estop-to-bracket.png).
+- <input type="checkbox" /> [Install the FN-36 switch to the FN-16 bracket](img/base-estop-to-bracket.png).
 - <input type="checkbox" /> Install the FN-16 bracket to the base plate using (4) FN-63 fasteners.
-    - Reference routing for E-stop and Kill Switch cable assembly:
-        - [View `1`](img/base-e-stop-routing.png)
-- <input type="checkbox" /> [Get FN-71 safety interlock and open up the door.](img/base-opendoor.png)
-- <input type="checkbox" /> [Terminate the `green` wire  to Point 11 and the `yellow/green` wire to Point 12 of the safety interlock.](img/base-interlockwiring.png)
-- <input type="checkbox" /> Close the door of the FN-71 safety interlock switch.
-- <input type="checkbox" /> [Secure the safety interlock switch to the FN-7 back riser using (2) FN-62 fasteners.](img/base-secure-interlock.png)
-- <input type="checkbox" /> [Ensure the kill switch tab is located at the top, not the side as shown](img/base-kill-switch-tab.png)
 
 ---
 
@@ -395,20 +388,20 @@
 
 | BOM Find No | Part Number  | Part Name                                             | Quantity | Note |
 | ----------- | ------------ | ----------------------------------------------------- | -------- | ---- |
-| FN-10       | 411-00495-01 | Plate, DDTCM, Jaeger                                  | 1 | |
+| FN-3        | 500-00192-01 | DDTCM                                                 | 1 | |
 | FN-21       | 411-00507-01 | Bracket, Base Snap-in Catch, Jaeger                   | 1 | |
 | FN-106      | 810-00391-01 | Cable Assy, DBPMMC Power, Jaeger                      | 1 | |
 | FN-107      | 810-00392-01 | Cable Assy, Wake Button, Jaeger                       | 1 | | 
 | FN-110      | 810-00418-01 | Cable Assy, Left Motor Encoder, DBPMMC to Controller  | 1 | |
 | FN-111      | 810-00418-02 | Cable Assy, Right Motor Encoder, DBPMMC to Controller | 1 | |
-| FN-112      | 810-00419-01 | Cable Assy, Interconnect ESTOP & Kill Switch          | 1 | |
+| None        | None         | Catch Latch (supplied with keeper - Tower BOM FN-35)      | 1        | |
 
 ### Fasteners
 
 | BOM Find No | Part Number  | Description                                         | Quantity | Where Used?                     |
 | ----------- | ------------ | --------------------------------------------------- | -------- | ------------------------------- |
 | FN-60       | 446-00370-10 | Screw, M5x10mm, Socket Head, Hex, Zn                | 8        | Cable encoder terminals, DD-TCM |
-| FN-63       | 446-00378-10 | Screw, M4x10mm, Socket Head, Hex, Zinc Plated Steel | 2        | FN-10                           |
+| FN-63       | 446-00378-10 | Screw, M4x10mm, Socket Head, Hex, Zinc Plated Steel | 4        | FN-21                           |
 | FN-51       | 444-00174-01 | Nut, M5x0.8, Nylon Insert Locknut, Zn               | 2        | DD-TCM                          |
 
 ### Tools
@@ -421,7 +414,6 @@
 
 ### Instructions
 
-- <input type="checkbox" /> [Get FN-10 base plate for DD-TCM install to base using (2) FN-63 fasteners.](img/base-ddtcm.png)
 - <input type="checkbox" /> [Install FN-3 DD-TCM using (2) FN-51 nuts.](img/base-ddtcm-install.png)
 - <input type="checkbox" /> Connect right motor encoder cable terminals to the DD-TCM using (3) FN-60 fasteners.
     - Note: Maintain the following order: `Blue --> W, Green --> V, Yellow --> U`
@@ -440,8 +432,8 @@
         - [View `1`](img/base-wake-button-view-1.png)
         - [View `2`](img/base-wake-button-view-2.png)
 - <input type="checkbox" /> Connect FN-102 (810-00332-02, ESTOP Switch Cable Assy) to Distribution PCB-A J3.
-- <input type="checkbox" /> [Install FN-21 snap-in catch bracket using (4) FN-60 fasteners.](img/base-snapincatch.png)
-- <input type="checkbox" /> [Install push-to-close latch into FN-21 bracket](img/base-catchlatch.png).
+- <input type="checkbox" /> Install FN-21 bracket using (4) FN-63 fasteners.
+- <input type="checkbox" /> [Install push-to-close latch (supplied with keeper - Tower BOM FN-35) into FN-21 bracket.
 - <input type="checkbox" /> Ensure all cables are neat and routed per below reference pictures:
 - See pictures for cable routing reference: 
     - [View `1`](img/base-routing-view-1.jpg)
@@ -453,13 +445,3 @@
 ## <font color="#e36c09">Final Quality Check - Base Assembly</font>
 
 >> Owner(s): Maliyah Thompson  
-
-## <font color="#e36c09">Special Rework Instructions</font>
-
-**ZLTech Motor Rework:**
-
-1. Cut back sheathing by 2.5in
-2. Loosen heat shrink tube already on cable and move it to cover the newly cut section
-3. Apply heat to shrink tube to cover newly cut section
-4. Crimp ring terminals on motor phase wires
-5. Label motor phase wires (U,V and W)
