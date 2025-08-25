@@ -1,6 +1,6 @@
 import re
 from typing import Any, Dict, List, Tuple
-from jira_tools.jira_api_client import JiraClient
+from jira_tools.jira_client import JiraClient
 from jira_tools.utils.parse import parse_robot_pid, parse_semver
 
 # matches a start-end effectivity range e.g. 0001-0086

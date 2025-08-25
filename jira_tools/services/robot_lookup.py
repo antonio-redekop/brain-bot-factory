@@ -1,5 +1,5 @@
 from typing import Dict
-from jira_tools.jira_api_client import JiraClient
+from jira_tools.jira_client import JiraClient
 
 def lookup_robot_pid(payload: Dict[str, str], client: JiraClient) -> str:
     """

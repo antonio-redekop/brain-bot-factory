@@ -1,6 +1,6 @@
 import pytest, requests
 from jira_tools.config.config import Config
-from jira_tools.jira_api_client import JiraClient
+from jira_tools.jira_client import JiraClient
 from jira_tools.utils.adf import parse_adf_description
 from jira_tools.services.events import get_event_history_for 
 from jira_tools.services.robot_lookup import lookup_robot_pid 

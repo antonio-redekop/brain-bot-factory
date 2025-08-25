@@ -1,6 +1,6 @@
 import re
 from typing import Dict, List, Any
-from jira_tools.jira_api_client import JiraClient
+from jira_tools.jira_client import JiraClient
 
 # Matches Markdown-style heading for an event
 _EVENT_HEADER_RE = re.compile(r"^\s*#{1,6}\s*(?P<etype>[A-Z_]+)\s*$", re.MULTILINE)

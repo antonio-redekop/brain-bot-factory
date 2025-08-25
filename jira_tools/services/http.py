@@ -3,7 +3,7 @@ import requests
 from typing import TYPE_CHECKING, Any, Mapping, Optional
 
 if TYPE_CHECKING:  # Only evaluated by type checkers, not at runtime
-    from jira_tools.jira_api_client import JiraClient
+    from jira_tools.jira_client import JiraClient
 
 class JiraHttpError(requests.exceptions.HTTPError):
     """Raised when Jira API returns an error response."""
