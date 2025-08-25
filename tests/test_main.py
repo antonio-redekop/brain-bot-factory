@@ -13,7 +13,8 @@ QR_TEST_PAYLOAD = { "rin": TEST_RIN }
 
 @pytest.fixture
 def client():
-    test_config = Config() 
+    # pull credentials from env/keyring via provider chain; no prompting by default
+    test_config = Config.from_providers(allow_prompt=False) 
     test_config.master_robot_issue_key = "POPS-2632"
     test_config.master_routing_issue_key = "POPS-2633"
     return JiraClient(config=test_config)

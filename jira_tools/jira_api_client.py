@@ -13,7 +13,8 @@ class JiraClientProtocol(Protocol):
 
 class JiraClient(JiraClientProtocol):
     def __init__(self, config: Config | None = None):
-        self.config = config or Config()
+        # no prompts by default
+        self.config = config or Config.from_providers(allow_prompt=False)
 
     def get_issue_data(self, issue_key: str) -> Dict[str, Any]:
         """
