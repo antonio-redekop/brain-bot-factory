@@ -101,3 +101,20 @@ def load_credentials(allow_prompt: bool = False) -> Credentials:
         "or run the interactive login (see CLI below), "
         "or ensure keyring has a token saved."
     )
+
+def clear_credentials(email: Optional[str] = None, domain: Optional[str] = None) -> bool:
+    """Delete the stored token from the OS keyring.
+    If email/domain are omitted, try env vars JIRA_EMAIL/JIRA_DOMAIN.
+    Returns True if something was deleted, False otherwise.
+    """
+    if keyring is None:
+        return False
+    email = email or os.getenv("JIRA_EMAIL")
+    domain = domain or os.getenv("JIRA_DOMAIN")
+    if not (email and domain):
+        return False
+    try:
+        keyring.delete_password(SERVICE_NAME, _scope_key(domain, email))
+        return True
+    except keyring.errors.PasswordDeleteError:
+        return False

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "brain-bot-factory"
+version = "0.1.0"
+description = "Manufacturing Execution System"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "requests",
+  "python-dotenv",
+  "keyring"
+]
+
+[project.scripts]
+jira-auth = "jira_tools.scripts.jira_auth:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["jira_tools*"]
