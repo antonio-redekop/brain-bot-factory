@@ -8,6 +8,8 @@
 
 ## Workmanship Standards
 
+- Use ESD handling precautions
+- Handle components with care; some components are cosmetically sensitive.
 - Take care to avoid fastener preload.
 - Take care to avoid cross-threading fasteners.
 - Take special care when installing steel bolts into aluminum (e.g. B3CM)
@@ -58,10 +60,6 @@
 
 ## <font color="#e36c09">Sequence: Pre-Assemble Sensors</font>
 
-```  
-Estimated time to complete:
-```
-
 ### Parts
 
 | BOM Find No | Part Number  | Part Name                                        | Quantity | Notes |
@@ -95,6 +93,7 @@ Estimated time to complete:
 **Prepare Bpearl Subassembly**  
 - <input type="checkbox" /> [Get (1) FN-1 Bpearl, (1) FN-18 Bpearl bracket, (1) FN-5 Bpearl insulator](tower-bpearl-assy.png)
 - <input type="checkbox" /> [Assemble the Bpearl subassembly using (3) FN-49 washers and (3) FN-45 fasteners.](tower-bpearl-assy-2.png)
+    - Note: Ensure the aluminum side of the FN-5 insulator is against the FN-18 bracket.
 
 **Prepare Sense Cameras**  
 - <input type="checkbox" /> [Get (4) FN-3 Sense cameras, (2) FN-16 brackets, (2) FN-17 brackets, and (8) FN-46 fasteners.](tower-sense-cameras.png)  
@@ -106,10 +105,6 @@ Estimated time to complete:
 
 ## <font color="#e36c09">Sequence: Bottom Fold Tower</font>
 
-```  
-Estimated time to complete:
-```
-
 ### Parts
 
 | BOM Find No | Part Number  | Part Name                                           | Quantity | Notes |
@@ -117,19 +112,23 @@ Estimated time to complete:
 | FN-9        | 410-00130-01 | Tube, Bottom Fold Tower, Jaeger                     | 1        |       |
 | FN-14       | 411-00486-01 | Plate, Snap-in Keeper                               | 1        |       |
 | FN-21       | 412-00203-01 | Mount, Curved Flange Hinge, Jaeger                  | 2        |       |
+| FN-23       | 420-00216-01 | Bezel, Bpearl and Camera, Jaeger                    | 1        |       |
 | FN-28       | 423-00276-01 | Small Insert A, Hinge, Jaeger                       | 1        |       |
 | FN-33       | 442-00567-01 | Tight-Hold Draw Latch with Safety Catch, 300 Series | 2        |       |
 | FN-35       | 830-00247-01 | Touchscreen Assembly, Gen 3                         | 1        |       |
+| FN-50       | 442-00594-01 | Spacer, Snap-Hook, Opaque Off-White                 | 1        |       |
+| FN-52       | 442-00596-01 | Spacer, Snap-Catch, Opaque Off-White                | 1        |       |
 
 ### Fasteners
 
 | BOM Find No | Part Number  | Description                                        | Quantity | Where Used?                                                       |
 | ----------- | ------------ | -------------------------------------------------- | -------- | ----------------------------------------------------------------- |
-| FN-40       | 446-00326-10 | Screw, M4×10 mm, Flat Head, Hex, Zn                | 15       | Mounting Sense camera assemblies, Bpearl subassembly, FN-14 plate |
+| FN-40       | 446-00326-10 | Screw, M4×10 mm, Flat Head, Hex, Zn                | 17       | Mounting Sense camera assemblies, Bpearl subassembly, FN-14 plate |
 | FN-44       | 446-00404-14 | Screw, M5×14 mm, Flat Head, Hex, Zinc Plated Steel | 4        | Mounting FN-21 curved flange hinges                               |
-| FN-45       | 446-00375-10 | Screw, M4×10 mm, Button Head, Hex, Zn              | 2        | Mounting FN-14 plate to FN-9 bottom fold tower                    |
+| FN-45       | 446-00375-10 | Screw, M4×10 mm, Button Head, Hex, Zn              | 13       | Various places                                                    |
 | FN-46       | 446-00406-16 | Screw, M5×16 mm, Button Head, Hex, Zn              | 2        | Mounting UHD camera (FN-2) to FN-9 bottom fold tower              |
 | FN-47       | 446-00403-10 | Screw, M3.5×10 mm, Button Head, Hex Drive, SS      | 8        | Mounting FN-33 latches and hooks to FN-9 bottom fold tower        |
+
 
 ### Tools
 
@@ -145,6 +144,7 @@ Estimated time to complete:
 **Mount Sense Camera Assemblies**  
 - <input type="checkbox" /> [Get FN-9 bottom fold tower, (1) Sense camera sub-assy with FN-16 bracket, and (1) Sense camera sub-assy with FN-17 bracket.](img/tower-bottom-1.png)
 - <input type="checkbox" /> [Mount the Sense camera assembly with the FN-16 bracket onto FN-9 using (4) FN-40 screws. ](tower-sense-assy_2.png)
+    - Note: Small side should face up.
 - <input type="checkbox" /> [Mount the Sense camera assembly with the FN-17 bracket onto FN-9 using (4) FN-40 screws.](tower-sense-assy.png) 
 
 **Install Draw Latches & Hooks** 
@@ -163,21 +163,26 @@ Estimated time to complete:
 
 **Install Push-to-Close Latch & Plate**  
 - <input type="checkbox" /> [Install (1) FN-35 push-to-close latch to the FN-14 plate using (2) FN-45 screws.](img/tower-push-to-close.png)
-- <input type="checkbox" /> [Mount the FN-14 plate (with latch attached) to FN-9 bottom fold tower using (2) FN-45 screws.](img/tower-bottom-plate.png)
+    - Note: Maintain orientation as shown.
+- <input type="checkbox" /> [Mount the FN-14 plate (with latch attached) to FN-9 bottom fold tower using (2) FN-40 screws.](img/tower-bottom-plate.png)
 
 **Install Hinge Insert**  
-- <input type="checkbox" /> [Get FN-28 small insert A and (1) FN-38 screw. Mount FN-28 to one FN-21 curved flange hinge using (1) FN-38 screw (H2.5 hex).](img/tower-small-insert.png)
+- <input type="checkbox" /> [Get FN-28 small insert A and (1) FN-38 screw. Loosely mount FN-28 to FN-21 curved flange hinge using (1) FN-38 screw (H2.5 hex).](img/tower-small-insert.png)
+    - Note: Final install after routing cables.
   
-**Install Catch Latch**  
-- <input type="checkbox" /> [Install the catch latch supplied with Item 35 (push-to-close latch) into FN-9 (align with FN-14 plate).](img/tower-catch-latch.png)
+**Install Catch Latch**
+- <input type="checkbox" /> Install the catch latch supplied with Item 35 (push-to-close latch) into FN-9 (align with FN-14 plate).
+    - Note: Maintain orientation as shown.
+
+**Install Gummy Bear**
+- <input type="checkbox" /> Install the FN-23 camera bezel to the FN-9 bottom tower using (4) FN-45 fasteners.
+
+**Install Spacers**
+- <input type="checkbox" /> Install the FN-50 and FN-52 spacers onto the FN-9 bottom tower. 
 
 ---
 
 ## <font color="#e36c09">Sequence: Middle Fold Tower</font>
-
-```  
-Estimated time to complete:
-```
 
 ### Parts
 
@@ -191,9 +196,9 @@ Estimated time to complete:
 | FN-17       | 411-00489-01 | Bracket, Tower Camera 5-deg, Jaeger     | 1        | From “Pre-Assemble Sensors” |
 | FN-22       | 420-00215-01 | Bezel, Touchscreen, Jaeger              | 1        |                             |
 | FN-21       | 412-00203-01 | Mount, Curved Flange Hinge, Jaeger      | 2        |                             |
-| FN-32       | 438-00164-01 | LCD Neoprene Seal, Jaeger               | 1        |                             |
 | FN-33       | 442-00567-01 | Tight-Hold Draw Latch with Safety Catch | 2        |                             |
 | FN-36       | 442-00570-01 | Handle, Pull, Oval 7″ L, Black Aluminum | 1        |                             |
+| FN-37       | 442-00575-01 | Hole Grommet, SBR Rubber 1-1/8" Hole    | 1        |                             |
 
 ### Fasteners
 
@@ -219,7 +224,7 @@ Estimated time to complete:
 ### Instructions
 
 **Prepare Touchscreen Assembly**
-- <input type="checkbox" /> [Get FN-4 touchscreen assembly,  FN-12 top bracket, FN-13 lower bracket,  and FN-37 grommet.](img/tower-touchscreen-assy.png)
+- <input type="checkbox" /> [Get FN-4 touchscreen assembly,  FN-12 top bracket, FN-13 lower bracket, and FN-37 grommet.](img/tower-touchscreen-assy.png)
 - <input type="checkbox" /> [Install FN-37 grommet into FN-13 lower bracket.](img/tower-install-grommet.png)
 - <input type="checkbox" /> [Install FN-12 top bracket and FN-13 lower bracket to the FN-4 touchscreen using (8) FN-48 thread-forming screws.](img/tower-touchscreen-brackets.png)
     - Torque the fasteners to 5 in-lbs.
@@ -257,10 +262,6 @@ Estimated time to complete:
 ---
 
 ## <font color="#e36c09">Sequence: Top Fold Tower</font>
-
-```  
-Estimated time to complete:
-```
 
 ### Parts
 
