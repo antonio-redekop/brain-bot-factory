@@ -20,3 +20,11 @@ To enable the `jira-auth` command, activate virtual env and install in editable 
 **Clear**
 - Remove stored credentials from the system keyring:
     - `jira-auth clear`
+
+## Testing
+
+- Run integration tests only
+`pytest -m integration`
+
+- Run all other tests except those marked "integration"
+`pytest -m "not integration`   # run everything except tests marked "integration"
