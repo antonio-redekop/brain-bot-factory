@@ -1,3 +1,6 @@
+import logging
+log = logging.getLogger(__name__)
+
 from typing import Any, List, Dict, Protocol
 from jira_tools.services.http import get_json, post_json, delete as http_delete
 from jira_tools.utils.adf import build_adf_comment_body, parse_adf_comment
@@ -103,4 +106,4 @@ class JiraClient(JiraClientProtocol):
         # Delete most recent comment
         delete_url = f"{comments_url}/{comment_id}"
         http_delete(delete_url, self)
-        print(f"Deleted comment ID {comment_id} from issue {issue_key}.")
+        log.info(f"Deleted comment ID {comment_id} from issue {issue_key}.")
