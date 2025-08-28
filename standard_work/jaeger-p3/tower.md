@@ -6,6 +6,7 @@
 | --- | --- | --- |
 | XXXXXX | 6/1/25 | Initial Release  |
 
+
 ## Workmanship Standards
 
 - Use ESD handling precautions
@@ -34,6 +35,7 @@
 |     M5      |      2.1        |       18.6         |         1.7            |          14.9             |
 |     M6      |      3.6        |       32.0         |         2.9            |          25.6             |
 
+
 ## Drawing / BOM References
 
 **Drawing**
@@ -48,6 +50,7 @@
 | [Sheet `4 of 12`](img/sheet4.png)  | [Sheet `10 of 12`](img/sheet10.png)  |                                      |
 | [Sheet `5 of 12`](img/sheet5.png)  | [Sheet `11 of 12`](img/sheet11.png)  |                                      |
 | [Sheet `6 of 12`](img/sheet6.png)  |                                      |                                      |
+
 
 **BOM (Bill of Materials)**
 
@@ -119,6 +122,7 @@
 | FN-50       | 442-00594-01 | Spacer, Snap-Hook, Opaque Off-White                 | 1        |       |
 | FN-52       | 442-00596-01 | Spacer, Snap-Catch, Opaque Off-White                | 1        |       |
 
+
 ### Fasteners
 
 | BOM Find No | Part Number  | Description                                        | Quantity | Where Used?                                                       |
@@ -138,6 +142,7 @@
 | H3 hex bit                      | For FN-44 fasteners (M5×14 mm)            |
 | H4 hex bit                      | For FN-46 fasteners (M5×16 mm)            |
 | 1/4 drive ratchet & 7 mm socket | (Optional) for subassembly alignment      |
+
 
 ### Instructions
 
@@ -174,7 +179,7 @@
 - <input type="checkbox" /> Install the catch latch supplied with Item 35 (push-to-close latch) into FN-9 (align with FN-14 plate).
     - Note: Maintain orientation as shown.
 
-**Install Gummy Bear**
+**Install Camera Bezel**
 - <input type="checkbox" /> Install the FN-23 camera bezel to the FN-9 bottom tower using (4) FN-45 fasteners.
 
 **Install Spacers**
@@ -194,23 +199,32 @@
 | FN-13       | 411-00485-01 | Tower Screen Lower Bracket, Jaeger      | 1        |                             |
 | FN-15       | 411-00487-01 | Plate, Tower Alignment, Jaeger          | 2        |                             |
 | FN-17       | 411-00489-01 | Bracket, Tower Camera 5-deg, Jaeger     | 1        | From “Pre-Assemble Sensors” |
-| FN-22       | 420-00215-01 | Bezel, Touchscreen, Jaeger              | 1        |                             |
+| FN-20       | 412-00201-01 | Mount, Pull Handle, Jaeger              | 1        |                             |
 | FN-21       | 412-00203-01 | Mount, Curved Flange Hinge, Jaeger      | 2        |                             |
+| FN-22       | 420-00215-01 | Bezel, Touchscreen, Jaeger              | 1        |                             |
+| FN-24       | 420-00217-01 | Fold Cover, Bpearl and Camera, Jaeger   | 1        |                             |
+| FN-27       | 423-00275-01 | Big Insert B, Hinge, Jaeger             | 1        |                             |
+| FN-29       | 423-00277-01 | Small Insert B, Hinge, Jaeger           | 1        |                             |
 | FN-33       | 442-00567-01 | Tight-Hold Draw Latch with Safety Catch | 2        |                             |
+| FN-35       | 442-00569-01 | Push-to-Close Latch with Keeper         | 1        |                             |
 | FN-36       | 442-00570-01 | Handle, Pull, Oval 7″ L, Black Aluminum | 1        |                             |
 | FN-37       | 442-00575-01 | Hole Grommet, SBR Rubber 1-1/8" Hole    | 1        |                             |
+| FN-50       | 442-00594-01 | Spacer, Snap-Hook, Opaque Off-White     | 1        |                             |
+
 
 ### Fasteners
 
 | BOM Find No | Part Number  | Description                                        | Quantity | Where Used?                                                    |
 | ----------- | ------------ | -------------------------------------------------- | -------- | -------------------------------------------------------------- |
+| FN-38       | 446-00416-12 | Screw, M3x12, Button Head, Hex Drive               | 2        | Mounting FN-27 and FN-29 inserts                               |
 | FN-40       | 446-00326-10 | Screw, M4×10 mm, Flat Head, Hex, Zn                | 12       | Mounting FN-15 plates, FN-17 bracket, FN-33 latches, and hooks |
-| FN-41       | 446-00326-12 | Screw, M4×12 mm, Flat Head, Hex, Zn                | 4        | Mounting FN-22 touchscreen bezel to FN-10 middle fold tower |
+| FN-41       | 446-00326-12 | Screw, M4×12 mm, Flat Head, Hex, Zn                | 4        | Mounting FN-22 touchscreen bezel to FN-10 middle fold tower    |
 | FN-43       | 446-00330-20 | Screw, M6×20 mm, Button Head, Hex, Zn              | 2        | Mounting FN-36 pull handle to FN-10                            |
 | FN-44       | 446-00404-14 | Screw, M5×14 mm, Flat Head, Hex, Zinc Plated Steel | 4        | Mounting FN-21 curved flange hinges to FN-10                   |
 | FN-45       | 446-00375-10 | Screw, M4×10 mm, Button Head, Hex, Zn              | 1        | Mounting FN-36 pull handle bracket (if needed)                 |
 | FN-47       | 446-00403-10 | Screw, M3.5×10 mm, Button Head, Hex Drive, SS      | 8        | Mounting FN-33 latches and hooks to FN-10                      |
 | FN-48       | 446-00405-01 | Screw, M4x10, Round Head, Phillips, Thread Forming, Zinc Plated Steel | 8 | Mounting touchscreen brackets (FN-12 & FN-13) to FN-4 |
+
 
 ### Tools
 
@@ -220,6 +234,7 @@
 | H3 hex bit                | For FN-44 fasteners (M5×14 mm)                      |
 | H4 hex bit                | For FN-41 fasteners (M4×12 mm) and FN-43 (M6×20 mm) |
 | Phillips drive bit (PH00) | For FN-48 touchscreen bracket screws                      |
+
 
 ### Instructions
 
@@ -232,32 +247,43 @@
 
 **Install Touchscreen Assembly and Bezel**  
 - <input type="checkbox" /> [Mount the touchstreen assembly to the FN-10 middle fold tower using (2) FN-40 fasteners.](img/tower-mount-touchscreen.png)
-- <input type="checkbox" /> [Install the FN-32 neoprene seal and FN-22 touchscreen bezel to the FN-10 middle fold tower using (4) FN-41 fasteners.](img/tower-touchscreen-bezel.png)
-    - Ensure adhesive side of neoprene seal against touchscreen bezel
+- <input type="checkbox" /> [Install the FN-22 touchscreen bezel to the FN-10 middle fold tower using (4) FN-41 fasteners.](img/tower-touchscreen-bezel.png)
       
 **Mount Sense Camera Assembly**  
 - <input type="checkbox" /> [Get the Sense camera subassembly (with FN-17 bracket).  Install onto FN-10 using (4) FN-40 screws.](img/tower-middle-fold-tower-sense.png)
     - Maintain orientation per drawing.
 
 **Install Curved Flange Hinges**  
-- <input type="checkbox" /> [Install (1) FN-21 curved flange hinge onto FN-10 middle fold tower.](img/tower-middle-tower-curved-hinge.png)
-- <input type="checkbox" /> [Install another FN-21 curved flange hinge onto FN-10 middle fold tower.](tower-middle-tower-curved-hinge-2.png)
+- <input type="checkbox" /> [Install FN-21 curved flange hinge onto FN-10 middle fold tower using (2) FN-44 fasteners.](img/tower-middle-tower-curved-hinge.png)
+- <input type="checkbox" /> [Install another FN-21 curved flange hinge onto FN-10 middle fold tower using (2) FN-44 fasteners.](tower-middle-tower-curved-hinge-2.png)
 
 **Install Pull Handle**  
-- <input type="checkbox" /> Get (2) FN-20 handle mounts and (4) FN-45 screws (for reference; FN-20 is part of the Top Fold Tower sequence but may be staged here if combined).  
-- <input type="checkbox" /> Get (1) FN-36 pull handle and (2) FN-43 screws. Mount FN-36 to FN-10 middle fold tower using (2) FN-43 screws (H4 hex).  
+- <input type="checkbox" /> Install (2) FN-20 handle mounts to the FN-10 middle tower using (4) FN-45 screws.  
+- <input type="checkbox" /> Install (1) FN-36 pull handle to the mounts using (2) FN-43 fasteners.  
 
 **Install Alignment Plates**  
-- <input type="checkbox" /> Get (2) FN-15 plates and (4) FN-40 screws. Mount two FN-15 plates to FN-10 using (4) FN-40 screws (H2.5 hex).  
+- <input type="checkbox" /> Install (2) FN-15 plates to FN-10 using (4) FN-40 screws (H2.5 hex).  
 
 **Install Draw Latches & Hooks**  
-- <input type="checkbox" /> Get (2) FN-33 latches and (4) FN-47 screws. Mount both FN-33 latches to FN-10 using (4) FN-47 screws (H2.5 hex).  
-- <input type="checkbox" /> Get (2) hooks (supplied with FN-33) and (4) FN-47 screws. Install (2) hooks to FN-10 using (4) FN-47 screws (H2.5 hex).
+- <input type="checkbox" /> Install (2) FN-33 latches to FN-10 using (4) FN-47 screws (H2.5 hex).  
+- <input type="checkbox" /> Install (2) hooks (supplied with FN-33) to FN-10 using (4) FN-47 screws (H2.5 hex).
 
 **Install Push-to-Close Latch & Plate**  
-- <input type="checkbox" /> Get (1) FN-35 push-to-close latch and (2) FN-45 screws.  
-- <input type="checkbox" /> Get (1) FN-14 plate. Mount latch to plate using (2) FN-45 screws (H2.5 hex).  
-- <input type="checkbox" /> Mount the FN-14 plate (with latch attached) to FN-10 using (2) FN-45 screws (H2.5 hex).
+- <input type="checkbox" /> Install (1) latch (supplied with FN-35) and (2) FN-45 screws.
+    - Note: Maintain orientation as shown.
+- <input type="checkbox" /> Get (1) FN-14 plate and (1) FN-35 latch. Mount latch to plate using (2) FN-45 screws (H2.5 hex).  
+- <input type="checkbox" /> Mount the FN-14 plate (with latch attached) to FN-10 using (2) FN-40 screws (H2.5 hex).
+    - Note: Maintain orientation as shown.
+
+**Install Gummy Bear**
+- <input type="checkbox" /> Install (1) FN-24 fold cover (Gummy Bear) using (4) FN-40 fasteners.
+
+**Install Spacer**
+- <input type="checkbox" /> Install (1) FN-50 spacer to the FN-10 middle fold tower.
+
+**Install Inserts**
+- <input type="checkbox" /> Install (1) FN-27 insert to the FN-10 middle fold tower using (1) FN-38 fastener.
+- <input type="checkbox" /> Install (1) FN-28 insert to the FN-10 middle fold tower using (1) FN-38 fastener.
 
 ---
 
